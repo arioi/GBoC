@@ -1,0 +1,57 @@
+body {
+}
+/* Pour que les liens ne soient pas soulignés */
+a {
+	text-decoration: none;
+}
+/*img {
+	vertical-align: middle;
+}*/
+/* Conteneur principal des blocs de la page */
+#container {
+	width: 80%;
+	margin: 50px auto;
+	padding: 2px 20px 20px 20px;
+	background: #d2d2d2;
+}
+
+/* Bloc contenant la zone de texte et bouton */
+.post_message  {
+	width: 30%;
+	margin: auto;
+	border: 1px solid #d2d2d2;
+	background: #d2d2d2;
+	padding: 3px;
+}
+/* Zone de texte */
+.post_message #message {
+	width: 80%;
+}
+/* Bouton d'envoi */
+.post_message #post {
+	width: 18%;
+}
+
+/* La zone où sont affichés les messages
+et utilisateurs connectés */
+.chat {
+	width: 30%;
+	margin: 10px auto;
+	border: 1px solid #d2d2d2;
+	padding: 0px;
+}
+/* Zone des messages */
+.chat #text-td {
+	margin: 0px; 
+	padding: 5px; 
+	width: 80%; 
+	background: #d2d2d2; 
+}
+
+.chat #text, .chat #users, .chat #users-chat {
+	height:200px; 
+	overflow-y: auto;
+}
+.info {
+	color: green;
+}

@@ -46,14 +46,14 @@
         <?php include("menus.php"); ?>
         <div id="corps">
             <h1>Tâche</h1>
-            <h3>Evénement:</h3>
+            <h3>Evénement</h3>
             <table>
                 <tr>
-                    <td>Nom</td>
-                    <td>Description</td>
-                    <td>Date et heure de début</td>
-                    <td>Date et heure de fin</td>
-                    <td>Lieux</td>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date et heure de début</th>
+                    <th>Date et heure de fin</th>
+                    <th>Lieux</th>
                 </tr>
                 <?php $event=$db->query('SELECT * FROM events WHERE hex(id_event)=\''.$task['id_event'].'\'');
                 $event = $event->fetch()?>
@@ -65,7 +65,7 @@
                     <td><?php echo $event['places_event'] ?></td>
             </table>
 
-            <h3>Tâche:</h3>
+            <h3>Tâche</h3>
             <?php if($moderator){ ?>
                 <form method="post" action="post_crud_task.php" id="create_task">
                     Nom de la tâche:<br>
@@ -95,28 +95,28 @@
             <?php }else{ ?>
                 <table>
                     <tr>
-                        <td>Nom</td>
-                        <td>Description</td>
-                        <td>Date et heure de début</td>
-                        <td>Date et heure de fin</td>
-                        <td>Lieux</td>
-                        <td>Nombre de bénévoles manquant</td>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date et heure de début</th>
+                        <th>Date et heure de fin</th>
+                        <th>Lieux</th>
+                        <th>Nombre de bénévoles manquant</th>
                     </tr>
                     <tr>
                         <td><?php echo $task['name_task']?></td>
                         <td><?php echo $task['info_task']?></td>
-                        <td><?php echo date("d/m/Y H:i", strtotime($task['begin_time_task']))?></td>
-                        <td><?php echo date("d/m/Y H:i", strtotime($task['end_time_task']))?></td>
+                        <td><?php echo date("d/m/Y H:i", strtotime($task['begin_datetime_task']))?></td>
+                        <td><?php echo date("d/m/Y H:i", strtotime($task['end_datetime_task']))?></td>
                         <td><?php echo $task['places_task']?></td>
-                        <td><?php echo $task['max_volunteers']-$task['volunteers']?></td>
+                        <td><?php echo $task['max_volunteers']-$task['nb_volunteer']?></td>
                     </tr>
                 </table>
             <?php } ?>
             <h3>Bénévoles</h3>
             <table>
                 <tr>
-                    <td>Nom</td>
-                    <td>Prénom</td>
+                    <th>Nom</th>
+                    <th>Prénom</th>
                 </tr>
                 <?php $volunteers=$db->query('SELECT hex(v.id_volunteer) id_volunteer, name_volunteer, surname_volunteer FROM volunteers v INNER JOIN task_volunteer tv ON v.id_volunteer = tv.id_volunteer WHERE hex(tv.id_task)=\''.$task['id_task'] .'\' ');
                 while($volunteer=$volunteers->fetch()){ ?>
@@ -127,7 +127,7 @@
                             <td><form method="POST" action="post_crud_task.php">
                                 <input type="hidden" name="id_volunteer" value=<?php echo '"'.$volunteer['id_volunteer'].'"'?>>
                                 <input type="hidden" name="id_task" value=<?php echo '"'.$task['id_task'].'"'?>>
-                                <input type="submit" name="unsubscribe" value="désincrire de la tache">
+                                <input type="submit" name="unsubscribe" value="désincrire de la tâche">
                             </form></td>
                         <?php } ?>
                     </tr>

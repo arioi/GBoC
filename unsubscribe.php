@@ -15,7 +15,7 @@
     <body>
         <?php include("menus.php"); ?>
         <div id="corps">
-            Vous êtes sur le point de vous désincrire du site, si vous continuez, toutes les informations vous consernant serons supprimmées.
+            Vous êtes sur le point de vous désincrire du site, si vous continuez, toutes les informations vous consernant seront supprimmées.
             <form method="post" action="post_data_volunteer.php">
                 <input type="submit" value="Continuer">
             </form>

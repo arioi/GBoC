@@ -18,9 +18,9 @@
             <h1>Liste des engagements</h1>
             <table>
                 <tr>
-                    <td>Commission</td>
-                    <td>événement</td>
-                    <td>tâche</td>
+                    <th>Commission</th>
+                    <th>événement</th>
+                    <th>tâche</th>
                 </tr>
                 <?php $tasks=$db->query('SELECT hex(t.id_task) id_task, name_task, name_commission, name_event
                   FROM tasks t

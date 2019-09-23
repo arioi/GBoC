@@ -76,13 +76,13 @@
 	                <?php }else{ ?>
 	                	<table>
 	                        <tr>
-	                            <td>Nom</td>
-	                            <td>Description</td>
-	                            <td>Date et heure de début</td>
-	                            <td>Date et heure de fin</td>
-	                            <td>Lieux</td>
-	                            <td>Nombre de personne attendu</td>
-	                            <td>Commissions participantes</td>
+	                            <th>Nom</th>
+	                            <th>Description</th>
+	                            <th>Date et heure de début</th>
+	                            <th>Date et heure de fin</th>
+	                            <th>Lieux</th>
+	                            <th>Nombre de personne attendu</th>
+	                            <th>Commissions participantes</th>
 	                        </tr>
 	                        <?php /*$event_commissions = str_replace('{', '(\'', $event['commissions']);
 	                        $event_commissions = str_replace(',', '\',\'', $event_commissions);
@@ -115,12 +115,12 @@
 		                <h4>Commission <?php echo $data_commmission['name_commission']?></h4>
 		                <table>
 		                    <tr>
-		                        <td>Nom</td>
-		                        <td>Description</td>
-		                        <td>Date et heure de début</td>
-		                        <td>Date et heure de fin</td>
-		                        <td>Lieux</td>
-		                        <td>Nombre de bénévoles manquant</td>
+		                        <th>Nom</th>
+		                        <th>Description</th>
+		                        <th>Date et heure de début</th>
+		                        <th>Date et heure de fin</th>
+		                        <th>Lieux</th>
+		                        <th>Nombre de bénévoles manquant</th>
 		                    </tr>
 		                    <?php
 		                    while($data_task=$tasks->fetch()){?>

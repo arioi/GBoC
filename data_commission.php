@@ -28,9 +28,9 @@
                 <div id="corps">
                     <table>
                         <tr>
-                            <td>Chargé de commission</td>
-                            <td>Mail</td>
-                            <td>Numero de Téléphone</td>
+                            <th>Chargé de commission</th>
+                            <th>Mail</th>
+                            <th>Numero de Téléphone</th>
                         </tr>
                         <?php
                         while($data_moderator = $moderators->fetch()){

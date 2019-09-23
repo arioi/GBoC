@@ -37,6 +37,19 @@
             $commissions->closeCursor();
         }
         $volunteers->closeCursor();
+        $check_account_create = $db->query('SELECT * FROM volunteers WHERE
+        id_volunteer = \''.hex2bin(str_replace('-','',$uuid)).'\'');
+        if($check_account_create->rowCount() > 0){
+         $volunteer = $check_account_create->fetch();
+         $to      = $volunteer['mail'];
+         $subject = 'GBoC - Création de compte';
+         $message = 'Bonjour ' . $volunteer['surname_volunteer'] .
+         'Ton inscription a bien été prise en compte. Tu recevras un mail prochainement quand ta demande pour une commission aura été validée par le responsable.' .
+         'Bonne journée !';
+         $headers = 'From: GBoC@mbtav.bzh';
+
+         mail($to, $subject, $message, $headers);
+        }
     }
-    header('location: reception.php);
+    //header('location: reception.php');
 ?>

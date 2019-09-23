@@ -64,23 +64,36 @@
             'mail' => $_POST['mail']
         ));
         $commissions = $db->query('SELECT * FROM commissions');
-        $add_volunteer = $db->prepare('UPDATE commissions SET volunteers_waiting = array_append(volunteers_waiting, :uuid) WHERE id_commission=:id');
-        $remove_volunteer = $db->prepare('UPDATE commissions SET volunteers_waiting = array_remove(volunteers_waiting, :uuid), volunteers = array_remove(volunteers, :uuid) WHERE id_commission=:id');
+        //$add_volunteer = $db->prepare('UPDATE commissions_volunteers SET volunteers_waiting = array_append(volunteers_waiting, :uuid) WHERE id_commission=:id');
+        //$remove_volunteer = $db->prepare('UPDATE commissions SET volunteers_waiting = array_remove(volunteers_waiting, :uuid), volunteers = array_remove(volunteers, :uuid) WHERE id_commission=:id');
+        $check_inscription = $db->prepare('SELECT * FROM commissions_volunteers cv WHERE id_commission = :id_commission AND id_volunteer = :id_volunteer');
+        $add_inscription = $db->prepare('INSERT INTO commissions_volunteers (id_commission, id_volunteer, volunteer_activ) VALUES(:id_commission, :id_volunteer, 0)');
+        $delete_inscription = $db->prepare('DELETE FROM commissions_volunteers WHERE id_commission = :id_commission AND id_volunteer = :id_volunteer');
         while($data_commission = $commissions->fetch()){
-            if(isset($_POST[$data_commission['name_commision']])){
-                if(!in_array($_SESSION['uuid'], explode(",",substr($data_commission['volunteers'],1,-1))) && !in_array($_SESSION['uuid'], explode(",",substr($data_commission['volunteers_waiting'],1,-1)))){
-                    $add_volunteer->execute(array(
-                        'uuid' =>$_SESSION['uuid'],
-                        'id' => $data_commission['id_commission']
-                    ));
-                }
+            if(isset($_POST[$data_commission['name_commission']])){
+              $check_inscription->execute(array(
+                'id_commission' => $data_commission['id_commission'],
+                'id_volunteer' => $_SESSION['uuid']
+              ));
+              $nb_enregistrements = $check_inscription->fetch();
+              if($nb_enregistrements['nb'] == 0) {
+                $add_inscription->execute(array(
+                  'id_commission' => $data_commission['id_commission'],
+                  'id_volunteer' => $_SESSION['uuid']
+                ));
+              }
             }else{
-                if(in_array($_SESSION['uuid'], explode(",",substr($data_commission['volunteers'],1,-1))) || in_array($_SESSION['uuid'], explode(",",substr($data_commission['volunteers_waiting'],1,-1)))){
-                    $remove_volunteer->execute(array(
-                        'uuid' =>$_SESSION['uuid'],
-                        'id' => $data_commission['id_commission']
-                    ));
-                }
+              $check_inscription->execute(array(
+                'id_commission' => $data_commission['id_commission'],
+                'id_volunteer' => $_SESSION['uuid']
+              ));
+              $nb_enregistrements = $check_inscription->fetch();
+              if($nb_enregistrements['nb'] > 0) {
+                $delete_inscription->execute(array(
+                  'id_commission' => $data_commission['id_commission'],
+                  'id_volunteer' => $_SESSION['uuid']
+                ));
+              }
             }
         }
         return($_POST['name']);

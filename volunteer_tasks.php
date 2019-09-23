@@ -21,11 +21,11 @@
             <h3>Evénement</h3>
             <table>
                 <tr>
-                    <td>Nom</td>
-                    <td>Description</td>
-                    <td>Date et heure de début</td>
-                    <td>Date et heure de fin</td>
-                    <td>Lieux</td>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date et heure de début</th>
+                    <th>Date et heure de fin</th>
+                    <th>Lieux</th>
                 </tr>
                 <tr>
                     <td><?php echo $event['name_event']?></td>
@@ -40,18 +40,18 @@
             $event['commissions'] = str_replace(',', '\',\'', $event['commissions']);
             $event['commissions'] = str_replace('}', '\')', $event['commissions']);*/
             $event_tasks = $db->query('SELECT c.name_commission, c.id_commission FROM tasks t INNER JOIN commissions c ON t.id_commission = c.id_commission WHERE hex(id_event)=\''.$_GET['id_event'].'\'
-            AND t.id_commission IN (SELECT id_commission FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\') ');
+            AND t.id_commission IN (SELECT id_commission FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\' AND volunteer_activ = TRUE)  ');
             while($task = $event_tasks->fetch()){
                 //$tasks = $db->query('SELECT id_task, name_task, info_task, begin_time_task, end_time_task, places_task, max_volunteers, array_length(registered_volunteers,1) AS volunteers FROM tasks WHERE event = \''.$_GET['id_event'].'\' AND commission = \''.$data_commmission['id_commission'].'\' AND \''.$_SESSION['uuid'].'\' != ALL (registered_volunteers)')?>
                 <h4>Commission <?php echo $task['name_commission']?></h4>
                 <table>
                     <tr>
-                        <td>Nom</td>
-                        <td>Description</td>
-                        <td>Date et heure de début</td>
-                        <td>Date et heure de fin</td>
-                        <td>Lieux</td>
-                        <td>Nombre de bénévoles manquant</td>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date et heure de début</th>
+                        <th>Date et heure de fin</th>
+                        <th>Lieux</th>
+                        <th>Nombre de bénévoles manquant</th>
                     </tr>
                     <?php
                     $commission_tasks = $db->query('SELECT hex(t.id_task) id_task,
@@ -81,6 +81,9 @@
                             <td><?php echo date("d/m/Y H:i", strtotime($data_task['end_datetime_task']))?></td>
                             <td><?php echo $data_task['places_task']?></td>
                             <td><?php echo $data_task['max_volunteers']-$data_task['volunteers']?></td>
+                            <td><form method="post" action=<?php echo '"task.php?id_task='.$data_task['id_task'].'"'?>>
+                                <input type="submit" name="task" value="Voir la tâche">
+                            </form></td>
                             <td><form method="post" action="post_crud_task.php">
                                 <input type="hidden" name="id_volunteer" value=<?php echo'"'.bin2hex($_SESSION['uuid']).'"'?>>
                                 <input type="hidden" name="id_task" value=<?php echo'"'.$data_task['id_task'].'"'?>>
@@ -96,7 +99,8 @@
                                   if ($engagement == 1){ ?>
                                       <input type="submit" name="unsubscribe" value="Se désengager">
                                   <?php
-                                } else { ?>
+                                } else {
+                                  ?>
                                   <input type="submit" name="undertaking" value="S'engager">
                                 <?php
                                 } ?>

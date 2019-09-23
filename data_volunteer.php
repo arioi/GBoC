@@ -22,14 +22,14 @@
             <form method="post" action="post_data_volunteer.php">
                 Nom de famille :<br>
                 <input type="text" name="name" required=""value= <?php echo '"'.$volunteer['name_volunteer'].'"'?>><br>
-                Préname :<br>
+                Prénom :<br>
                 <input type="text" name="surname" required=""value= <?php echo '"'.$volunteer['surname_volunteer'].'"'?>><br>
                 Adresse E-mail :<br>
-                <input type="mail" name="mail" required=""value= <?php echo '"'.$volunteer['mail'].'"'?>><br>
+                <input type="email" name="mail" required=""value= <?php echo '"'.$volunteer['mail'].'"'?>><br>
                 Numéro de telephone :<br>
-                <input type="tel" name="tel" pattern="0[0-9]{9}|0[0-9]( [0-9]{2}){4}"value= <?php echo '"'.$volunteer['number_tel'].'"'?>><br>
+                <input type="number" name="tel" pattern="0[0-9]{9}|0[0-9]( [0-9]{2}){4}"value= <?php echo '"'.$volunteer['number_tel'].'"'?>><br>
                 Date de naissance :<br>
-                <input type="date" name="birth_date" required="" disabled="disabled" value= <?php echo '"'.$volunteer['birth_date'].'"'?> ><br>
+                <input type="date" name="birth_date" required="" value= <?php echo '"'.$volunteer['birth_date'].'"'?> ><br>
                 Participation aux commissions :<br>
                 <?php $commissions = $db->query('SELECT * FROM commissions WHERE active');
                 $commissions_volunteers = $db->query('SELECT GROUP_CONCAT(id_commission) as id_commissions FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\'');
@@ -41,7 +41,7 @@
                 <input type="submit" name="update_data" value="Modifier mes informations">
             </form>
             <form method="post" action="post_data_volunteer.php">
-                Ancient mot de passe :<br>
+                Ancien mot de passe :<br>
                 <input type="password" name="old_password"><br>
                 Nouveau mot de passe :<br>
                 <input type="password" name="new_password"><br>

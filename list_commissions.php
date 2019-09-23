@@ -21,12 +21,13 @@
 
                     <h1>Liste des commissions</h1>
 
-                    <?php $commissions = $db->query('SELECT id_commission, name_commission, active FROM commissions');
+                    <ul id="simple_list">
+                    <?php $commissions = $db->query('SELECT id_commission, name_commission, active FROM commissions ORDER BY name_commission');
                     while($data_commission = $commissions->fetch()){
                       $id_commisssion = bin2hex($data_commission['id_commission']);
-                        echo '<a href="data_commission.php?id_commission='.$id_commisssion.'">'.$data_commission['name_commission'].'</a> Cette commission ';
-                        if($data_commission['active']) echo "est active.<br>"; else echo "n'est pas active <br>";
-                    } ?>
+                        echo '<li><a href="data_commission.php?id_commission='.$id_commisssion.'">'.$data_commission['name_commission'].'</a> Cette commission ';
+                        if($data_commission['active']) echo "est active.<br>"; else echo "n'est pas active </li>";
+                    } ?></ul>
 
                     <h2>Créer une nouvelle commission</h2>
 

@@ -8,6 +8,7 @@
     <head>
         <meta charset="utf-8" />
         <title>GBoC - inscription</title>
+        <link rel="stylesheet" type="text/css" href="GBoC.css" media="all"/>
     </head>
 
     <body>
@@ -28,7 +29,7 @@
                 répétez l'adresse E-mail* :<br>
                 <input type="email" name="mail_repeated" required="" size="26"><br>
                 Numéro de telephone (0X XX XX XX XX):<br>
-                <input type="tel" name="tel" pattern="0[0-9]( [0-9]{2}){4}" <?php if(isset($_GET['tel']))echo 'value="'.str_replace('+',' ',$_GET['tel']).'"' ?> size="11"><br>
+                <input type="number" name="tel" pattern="0[0-9]( [0-9]{2}){4}" <?php if(isset($_GET['tel']))echo 'value="'.str_replace('+',' ',$_GET['tel']).'"' ?> size="11"><br>
                 Date de naissance* :<br>
                 <input type="date" name="birth_date" required="" <?php if(isset($_GET['birth_date']))echo 'value='.$_GET['birth_date'] ?> ><br>
                 Participation aux commissions :<br>

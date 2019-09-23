@@ -22,13 +22,13 @@
                         <h1>Liste des bénévoles</h1>
                         <table>
                             <tr>
-                                <td>Nom</td>
-                                <td>Prénom</td>
-                                <td>Mail</td>
-                                <td>Numero de Téléphone</td>
-                                <td>Date de Naissance</td>
-                                <td>Commissions</td>
-                                <td>rôle</td>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Mail</th>
+                                <th>Numero de Téléphone</th>
+                                <th>Date de Naissance</th>
+                                <th>Commissions</th>
+                                <th>rôle</th>
                             </tr>
                             <?php
                                 $volunteers = $db->query('SELECT v.id_volunteer, name_volunteer, surname_volunteer, birth_date, number_tel, mail, role, GROUP_CONCAT(name_commission) name_commissions FROM volunteers v LEFT JOIN commissions_volunteers cv ON v.id_volunteer = cv.id_volunteer LEFT JOIN commissions c ON cv.id_commission = c.id_commission');

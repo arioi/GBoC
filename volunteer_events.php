@@ -20,12 +20,12 @@
             <h3>Evénement à venir</h3>
             <table>
                 <tr>
-                    <td>Nom</td>
-                    <td>Description</td>
-                    <td>Date et heure de début</td>
-                    <td>Date et heure de fin</td>
-                    <td>Lieux</td>
-                    <td>Commission(s)</td>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date et heure de début</th>
+                    <th>Date et heure de fin</th>
+                    <th>Lieux</th>
+                    <th>Commission(s)</th>
                 </tr>
                 <?php $events=$db->prepare('SELECT DISTINCT
                     e.id_event,

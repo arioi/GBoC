@@ -28,12 +28,12 @@
                     <h3>Bénévoles voulant participer à la commission</h3>
                     <table>
                         <tr>
-                            <td>Nom</td>
-                            <td>Prénom</td>
-                            <td>Mail</td>
-                            <td>Numero de Téléphone</td>
-                            <td>Date de Naissance</td>
-                            <td>Commissions</td>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Mail</th>
+                            <th>Numero de Téléphone</th>
+                            <th>Date de Naissance</th>
+                            <th>Commissions</th>
                         </tr>
                         <?php
                         $volunteers = $db->query('SELECT v.id_volunteer, v.name_volunteer, v.surname_volunteer, v.birth_date, v.number_tel, v.mail, v.role FROM volunteers v INNER JOIN commissions_volunteers cv ON v.id_volunteer = cv.id_volunteer WHERE cv.volunteer_activ = 0 AND cv.id_commission = \''.$data_commission['id_commission'].'\' ');
@@ -61,12 +61,12 @@
                     <h3>Bénévoles participant à la commission</h3>
                     <table>
                         <tr>
-                            <td>Nom</td>
-                            <td>Prénom</td>
-                            <td>Mail</td>
-                            <td>Numero de Téléphone</td>
-                            <td>Date de Naissance</td>
-                            <td>Commissions</td>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Mail</th>
+                            <th>Numero de Téléphone</th>
+                            <th>Date de Naissance</th>
+                            <th>Commissions</th>
                         </tr>
                         <?php
                         $volunteers = $db->query('SELECT v.id_volunteer, v.name_volunteer, v.surname_volunteer, v.birth_date, v.number_tel, v.mail, v.role FROM volunteers v INNER JOIN commissions_volunteers cv ON v.id_volunteer = cv.id_volunteer WHERE cv.volunteer_activ = 1 AND cv.id_commission = \''.$data_commission['id_commission'].'\' ');

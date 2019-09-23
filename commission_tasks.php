@@ -40,13 +40,13 @@
 
                     <table>
                         <tr>
-                            <td>Nom</td>
-                            <td>Description</td>
-                            <td>Date et heure de début</td>
-                            <td>Date et heure de fin</td>
-                            <td>Lieux</td>
-                            <td>Nombre de personne attendu</td>
-                            <td>Commissions participantes</td>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Date et heure de début</th>
+                            <th>Date et heure de fin</th>
+                            <th>Lieux</th>
+                            <th>Nombre de personne attendu</th>
+                            <th>Commissions participantes</th>
                         </tr>
                         <?php /*$event['commissions'] = str_replace('{', '(\'', $event['commissions']);
                         $event['commissions'] = str_replace(',', '\',\'', $event['commissions']);
@@ -66,14 +66,14 @@
                     <h3>Tâches créées</h3>
                     <table>
                         <tr>
-                            <td>Commission</td>
-                            <td>Nom</td>
-                            <td>Description</td>
-                            <td>Date et heure de début</td>
-                            <td>Date et heure de fin</td>
-                            <td>Lieux</td>
-                            <td>Nombre de bénévoles max</td>
-                            <td>Nombre de bénévole inscrits</td>
+                            <th>Commission</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Date et heure de début</th>
+                            <th>Date et heure de fin</th>
+                            <th>Lieux</th>
+                            <th>Nombre de bénévoles max</th>
+                            <th>Nombre de bénévole inscrits</th>
                         </tr>
                         <?php
                         $tasks = $db->query('SELECT

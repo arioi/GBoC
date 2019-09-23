@@ -70,7 +70,7 @@
             $remove_moderator = $db->query('DELETE FROM commissions_moderators WHERE id_moderator = \''.$id_moderator.'\' AND id_commission = \''.$id_commission.'\'');
             $moderators = $db->query('SELECT COUNT(1) AS nb FROM commissions_moderators WHERE id_moderator =\''.$id_moderator.'\'');
             $nb_enregistrements = $moderators->fetch();
-            if($nb_enregistrements[nb] == 0){
+            if($nb_enregistrements['nb'] == 0){
               $edit_role = $db->query('UPDATE volunteers SET role=\'VOLUNTEER\' WHERE role = \'MODERATOR\' AND id_volunteer = \''.$id_moderator.'\'');
             }
         }

@@ -43,13 +43,13 @@
          $volunteer = $check_account_create->fetch();
          $to      = $volunteer['mail'];
          $subject = 'GBoC - Création de compte';
-         $message = 'Bonjour ' . $volunteer['surname_volunteer'] .
-         'Ton inscription a bien été prise en compte. Tu recevras un mail prochainement quand ta demande pour une commission aura été validée par le responsable.' .
-         'Bonne journée !';
-         $headers = 'From: GBoC@mbtav.bzh';
+         $message = nl2br("Bonjour " . $volunteer['surname_volunteer'] . "\nTon inscription a bien été prise en compte. Tu recevras un mail prochainement quand ta demande pour une commission aura été validée par le responsable. \nBonne journée !");
+         $headers[] = 'MIME-Version: 1.0';
+         $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+         $headers[] = 'From: GBoC@mbtav.bzh';
 
-         mail($to, $subject, $message, $headers);
+         mail($to, $subject, $message, implode("\r\n", $headers));
         }
     }
-    //header('location: reception.php');
+    header('location: reception.php');
 ?>

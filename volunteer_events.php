@@ -53,7 +53,7 @@
                         <td><?php echo $data_event['places_event'] ?></td>
                         <td><?php echo $data_event['Commissions'] ?></td>
                         <td><form method="post" action=<?php echo '"volunteer_tasks.php?id_event='.bin2hex($data_event['id_event']).'"' ?>>
-                            <input type="submit" name="taches" value="Voir les tâches">
+                            <input class="table" type="submit" name="taches" value="Voir les tâches">
                         </form></td>
                     </tr>
                 <?php } ?>

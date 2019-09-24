@@ -220,22 +220,28 @@ select{
 input[type="submit"],
 input[type="button"]
 {
-	position: relative;
-	display: block;
-	padding: 19px 39px 18px 39px;
 	color: #FFF;
-	margin: 0 auto;
-	background: #1abc9c;
-	font-size: 18px;
-	text-align: center;
+	background: #4682b4;
+	font-size: 14px;
+	text-align: left;
 	font-style: normal;
-	width: 100%;
-	border: 1px solid #16a085;
-	border-width: 1px 1px 3px;
+	border: 1px solid #4682b4;
 	margin-bottom: 10px;
 }
 input[type="submit"]:hover,
 input[type="button"]:hover
 {
-	background: #109177;
+	background: grey;
+}
+
+.table
+{
+	padding: 5px 39px 5px 39px;
+	width: 100%;
+}
+
+.form
+{
+	padding: 19px 39px 18px 39px;
+	width: 30%;
 }

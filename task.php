@@ -90,7 +90,7 @@
                     <input type="number" name="max_volunteers" required="" value=<?php echo '"'.$task['max_volunteers'].'"' ?>><br>
                     <input type="hidden" name="id_commission" value=<?php echo '"'.$task['id_commission'].'"'?>>
                     <input type="hidden" name="id_task" value=<?php echo '"'.$_GET['id_task'].'"'?>>
-                    <input type="submit" name="update" value="Modifier la tache">
+                    <input class="form" type="submit" name="update" value="Modifier la tache">
                 </form>
             <?php }else{ ?>
                 <table>
@@ -127,7 +127,7 @@
                             <td><form method="POST" action="post_crud_task.php">
                                 <input type="hidden" name="id_volunteer" value=<?php echo '"'.$volunteer['id_volunteer'].'"'?>>
                                 <input type="hidden" name="id_task" value=<?php echo '"'.$task['id_task'].'"'?>>
-                                <input type="submit" name="unsubscribe" value="désincrire de la tâche">
+                                <input class="table" type="submit" name="unsubscribe" value="désincrire de la tâche">
                             </form></td>
                         <?php } ?>
                     </tr>

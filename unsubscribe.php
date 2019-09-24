@@ -17,10 +17,10 @@
         <div id="corps">
             Vous êtes sur le point de vous désincrire du site, si vous continuez, toutes les informations vous consernant seront supprimmées.
             <form method="post" action="post_data_volunteer.php">
-                <input type="submit" value="Continuer">
+                <input class ="form" type="submit" name="unsubscribe" value="Continuer">
             </form>
             <form method="post" action="data_volunteer.php">
-                <input type="submit" name="unsubscribe" value="Annuler">
+                <input class="form" type="submit" name="unsubscribe" value="Annuler">
             </form>
         </div>
     </body>

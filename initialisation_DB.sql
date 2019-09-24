@@ -7,7 +7,7 @@ DROP TABLE tasks;
 DROP TABLE events;
 DROP TABLE commissions;
 DROP TABLE volunteers;
-DROP TYPE role;
+DROP TABLE role;
 
 -- Enum --
 /*

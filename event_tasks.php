@@ -71,7 +71,7 @@
 	                        ?>
 	                        <br>
 	                        <input type="hidden" name="id" value= <?php echo '"'.bin2hex($event['id_event']).'"'?>>
-	                        <input type="submit" name="update_event" value="Modifier l'événement">
+	                        <input class="form" type="submit" name="update_event" value="Modifier l'événement">
 	                    </form>
 	                <?php }else{ ?>
 	                	<table>
@@ -132,7 +132,7 @@
 		                            <td><?php echo $data_task['places_task']?></td>
 		                            <td><?php echo $data_task['max_volunteers']-$data_task['volunteers']?></td>
 		                            <td><form method="post" action=<?php echo "task.php?id_task=".$data_task['id_task'] ?>>
-		                                <input type="submit" value="Voire la tache">
+		                                <input class="table" type="submit" value="Voire la tache">
 		                            </form></td>
 		                        </tr>
 		                    <?php } ?>

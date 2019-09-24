@@ -38,7 +38,7 @@
                     echo '<input type="checkbox" name ="'.$commission['name_commission'].'"';
                     if(in_array($commission['id_commission'], explode(",",$list_commissions['id_commissions'])))  echo "checked=\"\""; echo '>'.$commission['name_commission'].'<br>';
                 }?>
-                <input type="submit" name="update_data" value="Modifier mes informations">
+                <input class="form" type="submit" name="update_data" value="Modifier mes informations">
             </form>
             <form method="post" action="post_data_volunteer.php">
                 Ancien mot de passe :<br>
@@ -47,7 +47,7 @@
                 <input type="password" name="new_password"><br>
                 Répétez le nouveau mot de passe :<br>
                 <input type="password" name="new_password_repeated"><br>
-                <input type="submit" name="update_password" value="Modifier mon mot de passe"><br>
+                <input class="form" type="submit" name="update_password" value="Modifier mon mot de passe"><br>
             </form>
             <?php
             if(isset($_GET['error'])){
@@ -63,7 +63,7 @@
                 echo "Vos nouvelles information on bien été enregistrées";
             } ?>
             <form method="post" action="unsubscribe.php">
-                <input type="submit" value="Se désincrire du site">
+                <input class="form" type="submit" value="Se désincrire du site">
             </form>
         </div>
         <footer id="pied_de_page"></footer>

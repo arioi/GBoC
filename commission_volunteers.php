@@ -52,8 +52,8 @@
                                 <td><form method="post" action="post_commission_volunteers.php">
                                     <input type="hidden" name="id_volunteer" value=<?php echo'"'.$id_volunteer.'"'?>>
                                     <input type="hidden" name="id_commission" value=<?php echo'"'.$_GET['id'].'"'?>>
-                                    <input type="submit" name="waiting" value="Accepter">
-                                    <input type="submit" name="waiting" value="Refuser">
+                                    <input class="table" type="submit" name="waiting" value="Accepter">
+                                    <input class="table" type="submit" name="waiting" value="Refuser">
                                 </form></td>
                             </tr><?php
                         } ?>
@@ -84,7 +84,7 @@
                                 <td><form method="post" action="post_commission_volunteers.php">
                                     <input type="hidden" name="id_volunteer" value=<?php echo'"'.bin2hex($data_volunteer['id_volunteer']).'"'?>>
                                     <input type="hidden" name="id_commission" value=<?php echo'"'.$_GET['id'].'"'?>>
-                                    <input type="submit" name="goodbye" value="Désincrire de la commission">
+                                    <input class="table" type="submit" name="goodbye" value="Désincrire de la commission">
                                 </form></td>
                             </tr><?php
                         } ?>

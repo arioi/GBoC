@@ -11,9 +11,9 @@
 
     function connecting_db(){
         try{
-            $user = 'root';
-            $pass = '';
-            $db = new PDO('mysql:host=localhost;dbname=gboc', $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+            $user = 'U3898583';
+            $pass = 'AdminMBTav2229354456';
+            $db = new PDO('mysql:host=rdbms.strato.de;dbname=DB3898583', $user, $pass, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
             //$db = new PDO('mysql:host=localhost;port=3306;dbname=gboc;user=root;password=');
             return $db;
         }catch (Exception $e){

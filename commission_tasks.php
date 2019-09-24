@@ -107,7 +107,7 @@
                                 <td><?php echo $data_task['max_volunteers']?></td>
                                 <td><?php echo $data_task['nb_volunteer']?></td>
                                 <td><form method="post" action=<?php echo '"task?id_task='.bin2hex($data_task['id_task']).'"'?>>
-                                    <input type="submit" value="Voir la tâche">
+                                    <input class = "table" type="submit" value="Voir la tâche">
                                 </form></td>
                             </tr>
                         <?php } ?>
@@ -148,10 +148,10 @@
                             <input type="number" name="max_volunteers" required=""<?php if(isset($_GET['max_volunteers'])) echo 'value="'.$_GET['max_volunteers'].'"' ?>><br>
                             <input type="hidden" name="id_commission" value=<?php echo '"'.$_GET['id_commission'].'"'?>>
                             <input type="hidden" name="id_event" value=<?php echo '"'.$_GET['id_event'].'"'?>>
-                            <input type="submit" name="create" value="Créer la tache">
+                            <input class="form" type="submit" name="create" value="Créer la tache">
                         </form>
                         <?php if(isset($_GET['error']) && $_GET['error'] == 'date'){
-                            echo "Attention, la atche se termine avant qu'elle ne commence";
+                            echo "Attention, la tâche se termine avant qu'elle ne commence";
                         }
                     }?>
                 </div>

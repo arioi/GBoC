@@ -42,7 +42,7 @@
                                 echo '<option value="'.$data_volunteer['name_volunteer'].' '.$data_volunteer['surname_volunteer'].' ('.$data_volunteer['mail'].')"></option>';
                             }?>
                         </datalist>
-                        <input type="submit" name="add_commission" value="Ajouter une commission">
+                        <input class = "form" type="submit" name="add_commission" value="Ajouter une commission">
                     </form>
                 </div>
                 <footer id="pied_de_page"></footer>

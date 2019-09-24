@@ -4,16 +4,16 @@
         <meta charset="utf-8" />
         <title>GBoC - Accueil</title>
     </head>
- 
+
     <body>
         <div id="corps">
             <h1>Accueil du module de Gestion des Bénévoles Ou des Commissions</h1>
             <p>
                 Bienvenue sur le module de Gestion des bénévoles Ou des Commissions !<br />
-                Ce module est là pour permettre aux chargés de commissions de la mission bretonne de faire appel aux bénévoles afin d'aider lors d'événement et pouvoir communniquer avec eux directement.<br />
+                Ce module est là pour permettre aux chargés de commissions de la mission bretonne de faire appel aux bénévoles afin d'aider lors d'événement et pouvoir communiquer avec eux directement.<br />
             </p>
 
-            <?php 
+            <?php
                 if(isset($_GET['error'])){
                     if ($_GET['error'] == "mailnotexist") {
                         echo "Cette adresse mail n'est pas enregistrée. Une erreur dans l'adresse? Compte pas créé?";

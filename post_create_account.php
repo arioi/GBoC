@@ -48,7 +48,7 @@
          $headers[] = 'Content-type: text/html; charset=iso-8859-1';
          $headers[] = 'From: GBoC@mbtav.bzh';
 
-         mail($to, $subject, $message, implode("\r\n", $headers));
+         mail($to, utf8_decode($subject), utf8_decode($message), implode("\r\n", $headers));
         }
     }
     header('location: reception.php');

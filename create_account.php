@@ -28,7 +28,7 @@
                 <input type="email" name="mail" required="" <?php if(isset($_GET['mail']))echo 'value="'.$_GET['mail'].'"' ?> size="26"><br>
                 répétez l'adresse E-mail* :<br>
                 <input type="email" name="mail_repeated" required="" size="26"><br>
-                Numéro de telephone (0X XX XX XX XX):<br>
+                Numéro de telephone (0XXXXXXXXX):<br>
                 <input type="number" name="tel" pattern="0[0-9]( [0-9]{2}){4}" <?php if(isset($_GET['tel']))echo 'value="'.str_replace('+',' ',$_GET['tel']).'"' ?> size="11"><br>
                 Date de naissance* :<br>
                 <input type="date" name="birth_date" required="" <?php if(isset($_GET['birth_date']))echo 'value='.$_GET['birth_date'] ?> ><br>
@@ -43,7 +43,7 @@
                 Répétez le mot de passe* :<br>
                 <input type="password" name="password_repeated" required="" size="26"><br>
                 <input type="checkbox" name="charte" required=""> J'ai pris connaissance et j'accepte la <a href="charte.html" target="_blank">Charte d'utilisation</a><br>
-                <input type="submit" value="S'inscrire">
+                <input class="form" type="submit" value="S'inscrire">
             </form>
             <?php
                 if(isset($_GET['error'])){

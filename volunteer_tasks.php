@@ -97,11 +97,11 @@
                                   }
                                 }
                                   if ($engagement == 1){ ?>
-                                      <input type="submit" name="unsubscribe" value="Se désengager">
+                                      <input class="table" type="submit" name="unsubscribe" value="Se désengager">
                                   <?php
                                 } else {
                                   ?>
-                                  <input type="submit" name="undertaking" value="S'engager">
+                                  <input class="table" type="submit" name="undertaking" value="S'engager">
                                 <?php
                                 } ?>
                             </form></td>

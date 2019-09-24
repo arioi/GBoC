@@ -55,7 +55,7 @@
                                     <td><?php echo $data_event['places_event'] ?></td>
                                     <td><?php echo $data_event['expected_people'] ?></td>
                                     <td><form method="post" action=<?php echo '"commission_tasks.php?id_commission='.$_GET['id'].'&id_event='.bin2hex($data_event['id_event']).'"' ?>>
-                                        <input type="submit" name="tasks" value="Voir les tâches">
+                                        <input class="table" type="submit" name="tasks" value="Voir les tâches">
                                     </form>
                                 </tr>
                             <?php } ?>
@@ -97,7 +97,7 @@
                                     <td><?php echo $data_event['places_event'] ?></td>
                                     <td><?php echo $data_event['expected_people'] ?></td>
                                     <td><form method="post" action=<?php echo '"commission_tasks.php?id_commission='.$_GET['id'].'&id_event='.bin2hex($data_event['id_event']).'"' ?>>
-                                        <input type="submit" name="tasks" value="Voir les tâches">
+                                        <input class="table" type="submit" name="tasks" value="Voir les tâches">
                                     </form>
                                 </tr>
                             <?php } ?>

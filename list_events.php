@@ -42,7 +42,7 @@
                                 echo '<input type="checkbox" name ="'.$data_commission['name_commission'].'" value="'.bin2hex($data_commission['id_commission']).'">'.$data_commission['name_commission'].'<br>';
                             }
                         ?>
-                        <input type="submit" name="create_event" value="Créer l'événement">
+                        <input class="form" type="submit" name="create_event" value="Créer l'événement">
                     </form>
                     <?php if(isset($_GET['error']) && $_GET['error'] == 'date'){
                         echo "Attention, l'événement se termine avant qu'il ne commence";
@@ -92,7 +92,7 @@
                                     //while($data_commission = $commissions->fetch()) echo ', '.$data_commission['name_commission']?>
                                 </td>
                                 <td><form method="post" action=<?php echo '"event_tasks.php?id='.bin2hex($data_event['id_event']).'"';?>>
-                                    <input type="submit" value="Voir les tâches">
+                                    <input class="table" type="submit" value="Voir les tâches">
                                 </form></td>
                             </tr>
                         <?php } ?>
@@ -142,7 +142,7 @@
                                   //while($data_commission = $commissions->fetch()) echo ', '.$data_commission['name_commission']?>
                               </td>
                                 <td><form method="post" action=<?php echo '"event_tasks.php?id='.bin2hex($data_event['id_event']).'"';?>>
-                                    <input type="submit" value="Voir les tâches">
+                                    <input class="table" type="submit" value="Voir les tâches">
                                 </form></td>
                             </tr>
                         <?php } ?>

@@ -138,8 +138,8 @@
 		                            <td><?php echo date("d/m/Y H:i", strtotime($data_task['end_time_task']))?></td>
 		                            <td><?php echo $data_task['places_task']?></td>
 		                            <td><?php echo $data_task['max_volunteers']-$data_task['volunteers']?></td>
-		                            <td><form method="post" action=<?php echo "task.php?id_task=".$data_task['id_task'] ?>>
-		                                <input class="table" type="submit" value="Voire la tache">
+		                            <td><form method="post" action=<?php echo "task.php?id_task=".bin2hex($data_task['id_task']) ?>>
+		                                <input class="table" type="submit" value="Voir la tache">
 		                            </form></td>
 		                        </tr>
 		                    <?php } ?>

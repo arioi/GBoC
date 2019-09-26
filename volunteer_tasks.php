@@ -2,7 +2,7 @@
     session_start();
     include("functions.php");
     if(!user_verified()){
-        header('location: reception.php');
+        header('location: reception.php?location=' . urlencode($_SERVER['REQUEST_URI']));
     }
     $db = connecting_db();
     $event = $db->query('SELECT * FROM events WHERE hex(id_event)=\''.$_GET['id_event'].'\'');
@@ -39,7 +39,7 @@
             <?php /*$event['commissions'] = str_replace('{', '(\'', $event['commissions']);
             $event['commissions'] = str_replace(',', '\',\'', $event['commissions']);
             $event['commissions'] = str_replace('}', '\')', $event['commissions']);*/
-            $event_tasks = $db->query('SELECT c.name_commission, c.id_commission FROM tasks t INNER JOIN commissions c ON t.id_commission = c.id_commission WHERE hex(id_event)=\''.$_GET['id_event'].'\'
+            $event_tasks = $db->query('SELECT DISTINCT c.name_commission, c.id_commission FROM tasks t INNER JOIN commissions c ON t.id_commission = c.id_commission WHERE hex(id_event)=\''.$_GET['id_event'].'\'
             AND t.id_commission IN (SELECT id_commission FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\' AND volunteer_activ = TRUE)  ');
             while($task = $event_tasks->fetch()){
                 //$tasks = $db->query('SELECT id_task, name_task, info_task, begin_time_task, end_time_task, places_task, max_volunteers, array_length(registered_volunteers,1) AS volunteers FROM tasks WHERE event = \''.$_GET['id_event'].'\' AND commission = \''.$data_commmission['id_commission'].'\' AND \''.$_SESSION['uuid'].'\' != ALL (registered_volunteers)')?>

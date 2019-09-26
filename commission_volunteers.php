@@ -2,7 +2,7 @@
     session_start();
     include("functions.php");
     if(!user_verified()){
-        header('location: reception.php');
+        header('location: reception.php?location=' . urlencode($_SERVER['REQUEST_URI']));
     }
     $db = connecting_db();
         if(!commission_verified($_GET['id'])){

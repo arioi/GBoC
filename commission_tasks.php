@@ -2,7 +2,7 @@
     session_start();
     include("functions.php");
     if(!user_verified()){
-        header('location: reception.php');
+        header('location: reception.php?location=' . urlencode($_SERVER['REQUEST_URI']));
     }
     $db = connecting_db();
     if(!commission_verified($_GET['id_commission'])){
@@ -113,7 +113,7 @@
                                 <td><?php echo $data_task['places_task']?></td>
                                 <td><?php echo $data_task['max_volunteers']?></td>
                                 <td><?php echo $data_task['nb_volunteer']?></td>
-                                <td><form method="post" action=<?php echo '"task?id_task='.bin2hex($data_task['id_task']).'"'?>>
+                                <td><form method="post" action=<?php echo '"task.php?id_task='.bin2hex($data_task['id_task']).'"'?>>
                                     <input class = "table" type="submit" value="Voir la tâche">
                                 </form></td>
                             </tr>

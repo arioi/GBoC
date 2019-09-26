@@ -46,7 +46,7 @@
                     e.info_event,
                     e.begin_datetime_event,
                     e.end_datetime_event,
-                    e.places_event ');
+                    e.places_event');
                 $events->execute(array(
                     'today_date' => date("Y-m-d H:i"),
                     'id_volunteer' => $_SESSION['uuid']));

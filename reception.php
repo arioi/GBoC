@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -27,6 +28,13 @@
             ?>
 
             <form method="post" action="post_reception.php">
+              <?php
+              echo '<input type="hidden" name="location" value="';
+              if(isset($_GET['location'])) {
+                  echo htmlspecialchars($_GET['location']);
+              }
+              echo '" />';
+               ?>
                 Adresse E-mail :<br>
                 <input type="email" name="mail" required="" <?php if(isset($_COOKIE['mail'])) echo 'value='.$_COOKIE['mail']; ?> size="26"><br>
                 Mot de passe :<br>

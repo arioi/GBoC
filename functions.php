@@ -87,8 +87,8 @@
                 'id_commission' => $data_commission['id_commission'],
                 'id_volunteer' => $_SESSION['uuid']
               ));
-              $nb_enregistrements = $check_inscription->fetch();
-              if($nb_enregistrements['nb'] > 0) {
+              $nb_enregistrements = $check_inscription->rowCount();
+              if($nb_enregistrements > 0) {
                 $delete_inscription->execute(array(
                   'id_commission' => $data_commission['id_commission'],
                   'id_volunteer' => $_SESSION['uuid']

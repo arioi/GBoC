@@ -3,6 +3,11 @@
     include("functions.php");
     $db = connecting_db();
 
+    $redirect = NULL;
+    if($_POST['location'] != '') {
+      $redirect = $_POST['location'];
+    }
+
     $volunteers = $db->prepare('SELECT * FROM volunteers WHERE mail=:mail');
     $volunteers->execute(array('mail'=>$_POST['mail']));
     if($volunteers->rowCount() == 0){
@@ -14,7 +19,11 @@
         }else{
             $_SESSION['uuid'] = $data_volunteer['id_volunteer'];
             $_SESSION['role'] = $data_volunteer['role'];
-            header('location: volunteer_events.php');
+            if($redirect) {
+              header('Location:'. $redirect);
+            } else {
+              header('location: volunteer_events.php');
+            }
             setcookie('mail', '', time(), null, null, false, true);
             setcookie('password', '', time(), null, null, false, true);
             setcookie('save', '', time(), null, null, false, true);

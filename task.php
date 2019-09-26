@@ -2,36 +2,8 @@
     session_start();
     include("functions.php");
     if(!user_verified()){
-        header('location: reception.php');
+        header('location: reception.php?location=' . urlencode($_SERVER['REQUEST_URI']));
     }
-    $db = connecting_db();
-    $task = $db->query('SELECT
-      hex(t.id_task) id_task,
-      t.name_task,
-      t.info_task,
-      t.begin_datetime_task,
-      t.end_datetime_task,
-      t.places_task,
-      t.max_volunteers,
-      hex(t.id_event) id_event,
-      hex(t.id_commission) id_commission,
-      COUNT(tv.id_volunteer) as nb_volunteer
-    FROM tasks t
-    LEFT JOIN task_volunteer tv ON t.id_task = tv.id_task
-    LEFT JOIN volunteers v ON tv.id_volunteer = v.id_volunteer
-    WHERE hex(t.id_task) = \''.$_GET['id_task'].'\'
-    GROUP BY id_task,
-    name_task,
-    info_task,
-    begin_datetime_task,
-    end_datetime_task,
-    places_task,
-    max_volunteers,
-    hex(t.id_event),
-    hex(t.id_commission)');
-    $task = $task->fetch();
-    $moderators = $db->query('SELECT id_commission FROM commissions_moderators WHERE hex(id_commission) = \''.$task['id_commission'].'\' AND id_moderator = \''.$_SESSION['uuid'].'\' ');
-    $moderator = ($moderators->rowCount() > 0 || $_SESSION['role'] == 'ADMIN')
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +15,34 @@
         <script src="chat.js"></script>
     </head>
     <body>
-        <?php include("menus.php"); ?>
+        <?php include("menus.php");
+        $db = connecting_db();
+        $task = $db->query('SELECT
+          hex(t.id_task) id_task,
+          t.name_task,
+          t.info_task,
+          t.begin_datetime_task,
+          t.end_datetime_task,
+          t.places_task,
+          t.max_volunteers,
+          hex(t.id_event) id_event,
+          hex(t.id_commission) id_commission,
+          COUNT(tv.id_volunteer) as nb_volunteer
+        FROM tasks t
+        LEFT JOIN task_volunteer tv ON t.id_task = tv.id_task
+        WHERE hex(t.id_task) = \''.$_GET['id_task'].'\'
+        GROUP BY id_task,
+        name_task,
+        info_task,
+        begin_datetime_task,
+        end_datetime_task,
+        places_task,
+        max_volunteers,
+        hex(t.id_event),
+        hex(t.id_commission)');
+        $task = $task->fetch();
+        $moderators = $db->query('SELECT id_commission FROM commissions_moderators WHERE hex(id_commission) = \''.$task['id_commission'].'\' AND id_moderator = \''.$_SESSION['uuid'].'\' ');
+        $moderator = ($moderators->rowCount() > 0 || $_SESSION['role'] == 'ADMIN');?>
         <div id="corps">
             <h1>Tâche</h1>
             <h3>Evénement</h3>

@@ -40,7 +40,13 @@
                     INNER JOIN commissions_volunteers cv ON ec.id_commission = cv.id_commission
                     INNER JOIN commissions c ON ec.id_commission = c.id_commission
                   WHERE end_datetime_event > :today_date
-                    AND cv.id_volunteer = :id_volunteer');
+                    AND cv.id_volunteer = :id_volunteer
+                    GROUP BY e.id_event,
+                    e.name_event,
+                    e.info_event,
+                    e.begin_datetime_event,
+                    e.end_datetime_event,
+                    e.places_event ');
                 $events->execute(array(
                     'today_date' => date("Y-m-d H:i"),
                     'id_volunteer' => $_SESSION['uuid']));

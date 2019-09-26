@@ -33,7 +33,14 @@
                         INNER JOIN event_commission ec ON e.id_event = ec.id_event
                         INNER JOIN commissions_volunteers cv ON ec.id_commission = cv.id_commission
                         INNER JOIN commissions c ON ec.id_commission = c.id_commission
-                      WHERE hex(e.id_event) = \''.$_GET['id'].'\'');
+                      WHERE hex(e.id_event) = \''.$_GET['id'].'\'
+                      GROUP BY e.id_event,
+                      e.name_event,
+                      e.info_event,
+                      e.begin_datetime_event,
+                      e.end_datetime_event,
+                      e.places_event ,
+                      e.expected_people');
                     $event = $event->fetch();
                     $tasks = $db->query('SELECT * FROM tasks WHERE hex(id_event) = \''.$_GET['id'].'\'');
                     if($event['end_datetime_event'] >= date("Y-m-d H:i")){

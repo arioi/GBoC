@@ -70,7 +70,7 @@
         $add_inscription = $db->prepare('INSERT INTO commissions_volunteers (id_commission, id_volunteer, volunteer_activ) VALUES(:id_commission, :id_volunteer, 0)');
         $delete_inscription = $db->prepare('DELETE FROM commissions_volunteers WHERE id_commission = :id_commission AND id_volunteer = :id_volunteer');
         while($data_commission = $commissions->fetch()){
-            if(isset($_POST[$data_commission['name_commission']])){
+            if(isset($_POST[str_replace(' ', '_',$data_commission['name_commission'])])) {
               $check_inscription->execute(array(
                 'id_commission' => $data_commission['id_commission'],
                 'id_volunteer' => $_SESSION['uuid']

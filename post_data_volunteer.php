@@ -43,11 +43,11 @@
         }
     }
     if(isset($_POST['unsubscribe'])){
-        $unsubscribe = $bdd->query('DELETE FROM messages WHERE messenger =\''.$_SESSION['uuid'].'\'');
-        $unsubscribe = $bdd->query('DELETE FROM task_volunteer WHERE id_colunteer = \''.$_SESSION['uuid'].'\'');
-        $unsubscribe = $bdd->query('DELETE FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\'');
-        $unsubscribe = $bdd->query('DELETE FROM commissions_moderators WHERE id_moderator = \''.$_SESSION['uuid'].'\'');
-        $unsubscribe = $bdd->query('DELETE FROM volunteers WHERE id_volunteer =\''.$_SESSION['uuid'].'\'');
+        $unsubscribe = $db->query('DELETE FROM messages WHERE messenger =\''.$_SESSION['uuid'].'\'');
+        $unsubscribe = $db->query('DELETE FROM task_volunteer WHERE id_volunteer = \''.$_SESSION['uuid'].'\'');
+        $unsubscribe = $db->query('DELETE FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\'');
+        $unsubscribe = $db->query('DELETE FROM commissions_moderators WHERE id_moderator = \''.$_SESSION['uuid'].'\'');
+        $unsubscribe = $db->query('DELETE FROM volunteers WHERE id_volunteer =\''.$_SESSION['uuid'].'\'');
         header('location: reception.php');
     }
     $volunteer->closeCursor();

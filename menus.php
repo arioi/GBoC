@@ -15,10 +15,12 @@
             <li><a href="volunteer_events.php">Les événements à venir</a></li>
             <li><a href="volunteer_undertakings.php">Mes engagements</a></li>
             <?php if($_SESSION['role']!="VOLUNTEER"){
-            	echo "<li><a> Commissions</a>";
+            	echo "<li><a>Commissions</a>";
             	echo "<ul class = \"niveau2\">";
             	while($data_commission = $commissions->fetch()){
-            		if($_SESSION['role'] == "ADMIN" || in_array($_SESSION['uuid'], explode(",",substr($data_commission['moderators'],1,-1)))){
+                $moderators = $db->query('SELECT GROUP_CONCAT(id_moderator) AS moderators FROM commissions_moderators WHERE id_commission = \''.$data_commission['id_commission'].'\'');
+                $moderator = $moderators->fetch();
+                if($_SESSION['role'] == "ADMIN" || in_array($_SESSION['uuid'],explode(",",$moderator['moderators']))) {
             			echo "<li><a>Commission ".$data_commission['name_commission']."</a>";
             			echo '<ul class = "niveau3"><li><a href="commission_volunteers.php?id='.bin2hex($data_commission['id_commission']).'">Liste des bénévoles</a></li>';
             			echo "<li><a href='commission_events.php?id=".bin2hex($data_commission['id_commission'])."'>Liste des événements</a></li></ul></li>";

@@ -27,7 +27,7 @@
             $commissions = $db->query('SELECT * FROM commissions');
             $addcom = $db->prepare('INSERT INTO commissions_volunteers VALUES (:commission,:volunteer,FALSE)');
             while($data_commission = $commissions->fetch()){
-                if(isset($_POST[$data_commission['name_commission']])){
+                if(isset($_POST[str_replace(' ', '_', $data_commission['name_commission'])])) {
                     $addcom->execute(array(
                         ':commission' =>$data_commission['id_commission'],
                         ':volunteer' => hex2bin(str_replace('-','',$uuid))

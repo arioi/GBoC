@@ -23,7 +23,14 @@
           FROM events AS e
             INNER JOIN event_commission ec ON e.id_event = ec.id_event
             INNER JOIN commissions c ON ec.id_commission = c.id_commission
-            WHERE hex(e.id_event) = \''.$_GET['id_event'].'\'');
+            WHERE hex(e.id_event) = \''.$_GET['id_event'].'\'
+            GROUP BY e.id_event,
+            e.name_event,
+            e.info_event,
+            e.begin_datetime_event,
+            e.end_datetime_event,
+            e.places_event ,
+            e.expected_people');
         $event = $event->fetch();
 ?>
         <!DOCTYPE html>

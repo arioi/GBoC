@@ -10,7 +10,7 @@
     }else{
         $id_commission = hex2bin($_GET['id_commission']);
         $commission = $db->query('SELECT * FROM commissions WHERE id_commission=\''.$id_commission.'\'');
-        $moderators = $db->query('SELECT * FROM commissions_moderators WHERE id_commission =\''.$id_commission.'\'');
+
         $volunteers = $db->query('SELECT * FROM commissions_volunteers WHERE id_commission =\''.$id_commission.'\'');
         if($commission->rowCount() == 0){
             header('location: list_commissions.php');
@@ -33,6 +33,7 @@
                             <th>Numero de Téléphone</th>
                         </tr>
                         <?php
+                        $moderators = $db->query('SELECT * FROM commissions_moderators WHERE id_commission =\''.$id_commission.'\'');
                         while($data_moderator = $moderators->fetch()){
                           $moderator = $db->query('SELECT * FROM volunteers WHERE id_volunteer =\''.$data_moderator['id_moderator'].'\'');
                           while ($info_moderator = $moderator->fetch()) {

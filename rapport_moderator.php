@@ -20,7 +20,7 @@ while ($commission = $commissions->fetch()){
       $message .= nl2br("Voici les bénévoles ayant demandé à rejoindre la commission " .$commission['name_commission']. ", merci de prendre rapidement contact avec eux : \n" );
       $message .= '<table>';
       while($volunteer_waiting = $volunteers_waiting->fetch()){
-        $message .= '<tr><td>'.$volunteer_waiting['nom'].'</td><td>'.$volunteer_waiting['mail'].'</td><td>'.$volunteer_waiting['number_tel'].'</td></tr>';
+        $message .= '<tr><td>'.$volunteer_waiting['nom'].'</td><td>'.$volunteer_waiting['mail'].'</td><td>'.$volunteer_waiting['number_tel'].'</td><td><a href= "http://gestionbenevolesmbtav.fr/commission_volunteers.php?id='.bin2hex($commission['id_commission']).'">Valider ou pas l\'inscription</a></td></tr>';
       }
       $message .= '</table>';
       $message .= nl2br("\n\n");
@@ -44,6 +44,7 @@ while ($commission = $commissions->fetch()){
 
     /* Récupérer les infos sur les tâches en cours */
     $tasks = $db->query('SELECT
+        hex(t.id_task) AS id_task,
         e.name_event,
         t.name_task,
         t.begin_datetime_task,
@@ -54,7 +55,8 @@ while ($commission = $commissions->fetch()){
       LEFT JOIN task_volunteer tv ON t.id_task = tv.id_task
       LEFT JOIN volunteers v ON tv.id_volunteer = v.id_volunteer
       WHERE t.end_datetime_task >= Curdate() AND t.id_commission = \''.$commission['id_commission'].'\'
-      GROUP BY e.name_event,
+      GROUP BY hex(t.id_task),
+      e.name_event,
       t.name_task,
       t.begin_datetime_task,
       t.max_volunteers
@@ -63,7 +65,7 @@ while ($commission = $commissions->fetch()){
       $message .= nl2br("Voici l'état des lieux des tâches à venir : \n" );
       $message .= '<table rules="all" style="border-color: #666;" cellpadding="10"><tr><th>Evenement</th><th>Tâche</th><th>Date</th><th>Nbre souhaité</th><th>Bénévole(s) inscrit(s)</th></tr>';
       while($task = $tasks->fetch()){
-        $message .= '<tr><td>'.$task['name_event'].'</td><td>'.$task['name_task'].'</td><td>'.date('d/m/y',strtotime($task['begin_datetime_task'])).'</td><td>'.$task['max_volunteers'].'</td><td>'.$task['benevole'].'</td></tr>';
+        $message .= '<tr><td>'.$task['name_event'].'</td><td>'.$task['name_task'].'</td><td>'.date('d/m/y',strtotime($task['begin_datetime_task'])).'</td><td>'.$task['max_volunteers'].'</td><td>'.$task['benevole'].'</td><td><a href= "http://gestionbenevolesmbtav.fr/task.php?id_task='.$task['id_task'].'">Voir la tâche</a></td></tr>';
       }
       $message .= '</table>';
       $message .= nl2br("\n");
@@ -77,38 +79,8 @@ while ($commission = $commissions->fetch()){
 
   // Envoie
 if($volunteers_waiting->rowCount() != 0 || $new_events->rowCount() != 0 || $tasks->rowCount() != 0){
-    $resultat = mail($to, $subject, $message, $headers);
+    $resultat = mail($to, utf8_decode($subject), $message, $headers);
   }
 }
-
-// Destinataire
-/*$to = "arioi@lavache.com";
-// Sujet
-$subject = 'Test de planification de tâche Cron';
-
-// Message
-$message = '
-<html>
-  <head>
-    <title>Test Cron</title>
-  </head>
-  <body>
-    <table width="100%" border="0" cellspacing="0" cellpadding="5">
-      <tr>
-        <td align="center">
-          <p>
-            Ceci est un test qui prouve que Cron fonctionne correctement !
-          </p>
-          <p>
-            Chouette, hein ?
-          </p>
-        </td>
-      </tr>
-    </table>
-  </body>
-</html>
-';
-*/
-// Pour envoyer un mail HTML, l en-tête Content-type doit être défini
 
 ?>

@@ -31,7 +31,27 @@
                                 <th>rôle</th>
                             </tr>
                             <?php
-                                $volunteers = $db->query('SELECT v.id_volunteer, name_volunteer, surname_volunteer, birth_date, number_tel, mail, role, GROUP_CONCAT(name_commission) name_commissions FROM volunteers v LEFT JOIN commissions_volunteers cv ON v.id_volunteer = cv.id_volunteer LEFT JOIN commissions c ON cv.id_commission = c.id_commission GROUP BY v.id_volunteer, name_volunteer, surname_volunteer, birth_date, number_tel, mail, role');
+                                $volunteers = $db->query('SELECT
+                                  hex(v.id_volunteer) AS id_volunteer,
+                                  name_volunteer,
+                                  surname_volunteer,
+                                  birth_date,
+                                  number_tel,
+                                  mail,
+                                  role,
+                                  GROUP_CONCAT(name_commission) name_commissions
+                                  FROM volunteers v
+                                  LEFT JOIN commissions_volunteers cv ON v.id_volunteer = cv.id_volunteer
+                                  LEFT JOIN commissions c ON cv.id_commission = c.id_commission
+                                  GROUP BY
+                                    hex(v.id_volunteer),
+                                    name_volunteer,
+                                    surname_volunteer,
+                                    birth_date,
+                                    number_tel,
+                                    mail,
+                                    role
+                                  ORDER BY name_volunteer, surname_volunteer');
                                 while($data_volunteer = $volunteers->fetch()){
                                     //$commissions = $db->query('SELECT name_commission FROM commissions c INNER JOIN commissions_volunteers cv ON c.id_commission = cv.id_commission WHERE cv.id_volunteer = \''.$data_volunteer['id_volunteer'].'\'');?>
                                     <tr>
@@ -44,7 +64,11 @@
                                         <td><?php
                                         echo $data_volunteer['role'].'<br>';
                                         if($data_volunteer['role'] == 'MODERATOR' || $data_volunteer['role'] == 'ADMIN'){
-                                            $moderator = $db->query('SELECT GROUP_CONCAT(name_commission) name_commission FROM commissions c INNER JOIN commissions_moderators cm ON c.id_commission = cm.id_commission WHERE cm.id_moderator = \''.$data_volunteer['id_volunteer'].'\' ');
+                                            $moderator = $db->query('SELECT GROUP_CONCAT(name_commission) name_commission
+                                            FROM commissions c
+                                            INNER JOIN commissions_moderators cm
+                                            ON c.id_commission = cm.id_commission
+                                            WHERE hex(cm.id_moderator) = \''.$data_volunteer['id_volunteer'].'\' ');
                                             $data_moderator = $moderator->fetch();
                                             echo "(Responsable des commissions : ".$data_moderator['name_commission'];
                                             echo ')';

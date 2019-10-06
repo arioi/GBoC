@@ -70,7 +70,6 @@
                             GROUP_CONCAT(c.name_commission SEPARATOR" ; ") as commissions
                           FROM events AS e
                             INNER JOIN event_commission ec ON e.id_event = ec.id_event
-                            INNER JOIN commissions_volunteers cv ON ec.id_commission = cv.id_commission
                             INNER JOIN commissions c ON ec.id_commission = c.id_commission
                             WHERE end_datetime_event >= Curdate()
                             GROUP BY e.id_event,
@@ -127,7 +126,6 @@
                             GROUP_CONCAT(c.name_commission SEPARATOR" ; ") as commissions
                           FROM events AS e
                             INNER JOIN event_commission ec ON e.id_event = ec.id_event
-                            INNER JOIN commissions_volunteers cv ON ec.id_commission = cv.id_commission
                             INNER JOIN commissions c ON ec.id_commission = c.id_commission
                             WHERE end_datetime_event < Curdate()
                             GROUP BY e.id_event,

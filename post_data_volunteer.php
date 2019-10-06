@@ -5,7 +5,7 @@
         header('location: reception.php');
     }
     $db = connecting_db();
-    $volunteer = $db->query('SELECT * FROM volunteers WHERE id_volunteer=\''.$_SESSION['uuid'].'\'');
+    $volunteer = $db->query('SELECT * FROM volunteers WHERE hex(id_volunteer)=\''.bin2hex($_SESSION['uuid']).'\'');
     $data_volunteer = $volunteer->fetch();
 
     if(isset($_POST['update_data'])){

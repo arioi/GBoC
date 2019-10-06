@@ -27,7 +27,7 @@
                   INNER JOIN task_volunteer tv ON t.id_task = tv.id_task
                   INNER JOIN commissions c ON t.id_commission = c.id_commission
                   INNER JOIN events e ON t.id_event = e.id_event
-                  WHERE tv.id_volunteer = \''.$_SESSION['uuid'].'\'
+                  WHERE hex(tv.id_volunteer) = \''.bin2hex($_SESSION['uuid']).'\'
                   ORDER BY t.begin_datetime_task');
                 while($data_task = $tasks->fetch()){?>
                     <tr>

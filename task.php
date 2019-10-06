@@ -41,7 +41,7 @@
         hex(t.id_event),
         hex(t.id_commission)');
         $task = $task->fetch();
-        $moderators = $db->query('SELECT id_commission FROM commissions_moderators WHERE hex(id_commission) = \''.$task['id_commission'].'\' AND id_moderator = \''.$_SESSION['uuid'].'\' ');
+        $moderators = $db->query('SELECT id_commission FROM commissions_moderators WHERE hex(id_commission) = \''.$task['id_commission'].'\' AND hex(id_moderator) = \''.bin2hex($_SESSION['uuid']).'\' ');
         $moderator = ($moderators->rowCount() > 0 || $_SESSION['role'] == 'ADMIN');?>
         <div id="corps">
             <h1>Tâche</h1>

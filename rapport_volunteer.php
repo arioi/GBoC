@@ -53,7 +53,7 @@ while ($volunteer = $volunteers->fetch()){
   $headers .= 'From: GBoC@mbtav.fr' . "\r\n";
 
   // Envoie
-if($x = 1){
+if($x == 1){
     $resultat = mail($to, utf8_decode($subject), $message, $headers);
   }
 }

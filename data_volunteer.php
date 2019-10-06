@@ -4,8 +4,9 @@
     if(!user_verified()){
         header('location: reception.php');
     }
+
     $db = connecting_db();
-    $volunteer = $db->query('SELECT id_volunteer, name_volunteer, surname_volunteer, birth_date, number_tel, mail FROM volunteers WHERE id_volunteer= \''.$_SESSION['uuid'].'\'');
+    $volunteer = $db->query('SELECT id_volunteer, name_volunteer, surname_volunteer, birth_date, number_tel, mail FROM volunteers WHERE hex(id_volunteer)= \''.bin2hex($_SESSION['uuid']).'\'');
     $volunteer = $volunteer->fetch()
 ?>
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
                 <input type="date" name="birth_date" required="" value= <?php echo '"'.$volunteer['birth_date'].'"'?> ><br>
                 Participation aux commissions :<br>
                 <?php $commissions = $db->query('SELECT * FROM commissions WHERE active');
-                $commissions_volunteers = $db->query('SELECT GROUP_CONCAT(id_commission) as id_commissions FROM commissions_volunteers WHERE id_volunteer = \''.$_SESSION['uuid'].'\'');
+                $commissions_volunteers = $db->query('SELECT GROUP_CONCAT(id_commission) as id_commissions FROM commissions_volunteers WHERE hex(id_volunteer) = \''.bin2hex($_SESSION['uuid']).'\'');
                 $list_commissions = $commissions_volunteers->fetch();
                 while($commission = $commissions->fetch()){
                     echo '<input type="checkbox" name ="'.$commission['name_commission'].'"';

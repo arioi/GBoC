@@ -31,7 +31,8 @@ while ($commission = $commissions->fetch()){
       FROM events e
       INNER JOIN event_commission ec ON ec.id_event = e.id_event AND ec.id_commission = \''.$commission['id_commission'].'\'
       LEFT JOIN tasks t ON ec.id_event = t.id_event AND t.id_commission = ec.id_commission
-      WHERE t.id_event IS NULL AND e.end_datetime_event >= Curdate()');
+      WHERE t.id_event IS NULL AND e.end_datetime_event >= Curdate()
+      AND hex(e.id_event) <> \'8A561691A32D45CEB4354AC64E30BB66\'');
     if($new_events->rowCount() != 0){
       $message .= nl2br("Voici les évènements à venir pour lesquels il n'y a aucune tâche : \n" );
       $message .= '<table>';

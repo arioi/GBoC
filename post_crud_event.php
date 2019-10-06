@@ -31,7 +31,7 @@
 /*********************************INSERT EVENT_COMMISSION**********************************************/
                 $commissions = $db->query('SELECT * FROM commissions WHERE active');
                 while($data_commission = $commissions->fetch()){
-                    if(isset($_POST[$data_commission['name_commission']])){
+                    if(isset($_POST[str_replace(' ', '_', $data_commission['name_commission'])])){
                       $event = $db->prepare('INSERT INTO event_commission (id_commission,id_event) VALUES(:id_commission, :id_event)');
                       $event->execute(array(
                           'id_commission' =>$data_commission['id_commission'],
@@ -63,7 +63,7 @@
                         	AND hex(ec.id_event) = \''.$_POST['id'].'\'
                         WHERE c.active');
                     while($data_commission = $commissions->fetch()){
-                        if(isset($_POST[$data_commission['name_commission']])){
+                        if(isset($_POST[str_replace(' ', '_', $data_commission['name_commission'])])){
                           if(is_null($data_commission['event_commission'])){
                           $event = $db->prepare('INSERT INTO event_commission (id_commission , id_event) VALUES (:id_commission , :id_event)');
                           $event->execute(array(

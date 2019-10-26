@@ -27,7 +27,7 @@
                     'end_date'=>$_POST['end_date'].' '.$_POST['end_time'],
                     'places'=>$_POST['places'],
                     'expected'=>$_POST['expected']));
-                header('location: list_events.php');
+              //  header('location: list_events.php');
 /*********************************INSERT EVENT_COMMISSION**********************************************/
                 $commissions = $db->query('SELECT * FROM commissions WHERE active');
                 while($data_commission = $commissions->fetch()){
@@ -36,10 +36,29 @@
                       $event->execute(array(
                           'id_commission' =>$data_commission['id_commission'],
                           'id_event'=>hex2bin(str_replace('-','',$uuid))
-                          ));;
+                          ));
+                          $moderators = $db->query('SELECT v.surname_volunteer, v.name_volunteer, v.mail FROM commissions_moderators cm INNER JOIN volunteers v ON cm.id_moderator = v.id_volunteer WHERE cm.id_commission = \''.$data_commission['id_commission'].'\'');
+                          while ($moderator = $moderators->fetch()){
+                            $to = $moderator['mail'];
+                            $subject = 'GBoC - Nouvel évènement créé';
+                            $message = nl2br("<h3>Les infos concernant la commission " .$data_commission['name_commission']. "</h3>");
+                            $message .= nl2br("Bonjour " .$moderator['surname_volunteer'] .",\n\n");
+                            $message .= nl2br("Un nouvel évènement a été créé en urgence, merci de créer les tâches : \n" );
+                            $message .= '<table>';
+                            $message .= '<tr><td>'.$_POST['name'].'</td><td>'.date('d/m/y',strtotime($_POST['begin_date'].' '.$_POST['begin_time'])).'</td><td><a href= "http://gestionbenevolesmbtav.fr/commission_tasks.php?id_commission='.bin2hex($data_commission['id_commission']).'&id_event='.str_replace('-','',$uuid).'">Créer ses tâches</a></td></tr>';
+                            $message .= '</table>';
+                            $message .= nl2br("\n\n");
+                          }
+                          $headers = "MIME-Version: 1.0" . "\n";
+                          $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+
+                          // En-têtes additionnels
+                          $headers .= 'From: GBoC@mbtav.fr' . "\r\n";
+                          if( ((strtotime($_POST['begin_date']) - time()) / (60 * 60 * 24)) < 8 ){
+                              $resultat = mail($to, utf8_decode($subject), $message, $headers);
+                          }
                     }
                 }
-
                 header('location: list_events.php');
             }
 
@@ -70,6 +89,26 @@
                               'id_commission' =>$data_commission['id_commission'],
                               'id_event'=>hex2bin($_POST['id'])
                               ));
+                            }
+                            $moderators = $db->query('SELECT v.surname_volunteer, v.name_volunteer, v.mail FROM commissions_moderators cm INNER JOIN volunteers v ON cm.id_moderator = v.id_volunteer WHERE cm.id_commission = \''.$data_commission['id_commission'].'\'');
+                            while ($moderator = $moderators->fetch()){
+                              $to = $moderator['mail'];
+                              $subject = 'GBoC - Evènement modifié';
+                              $message = nl2br("<h3>Les infos concernant la commission " .$data_commission['name_commission']. "</h3>");
+                              $message .= nl2br("Bonjour " .$moderator['surname_volunteer'] .",\n\n");
+                              $message .= nl2br("L'évènement suivant a été modifié en urgence, merci de mettre à jour les tâches correspondantes : \n" );
+                              $message .= '<table>';
+                              $message .= '<tr><td>'.$_POST['name'].'</td><td>'.date('d/m/y',strtotime($_POST['begin_date'].' '.$_POST['begin_time'])).'</td><td><a href= "http://gestionbenevolesmbtav.fr/commission_tasks.php?id_commission='.bin2hex($data_commission['id_commission']).'&id_event='.str_replace('-','',$uuid).'">Créer ses tâches</a></td></tr>';
+                              $message .= '</table>';
+                              $message .= nl2br("\n\n");
+                            }
+                            $headers = "MIME-Version: 1.0" . "\n";
+                            $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+
+                            // En-têtes additionnels
+                            $headers .= 'From: GBoC@mbtav.fr' . "\r\n";
+                            if( ((strtotime($_POST['begin_date']) - time()) / (60 * 60 * 24)) < 8 ){
+                                $resultat = mail($to, utf8_decode($subject), $message, $headers);
                             }
                         } else {
                           if(!is_null($data_commission['event_commission'])) {

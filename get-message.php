@@ -3,7 +3,7 @@
 	include('functions.php');
 	$db=connecting_db();
 	/* On effectue la requête sur la table contenant les messages. Enfin, on affiche le tout. */
-	$messages = $db->query("SELECT m.*, name_volunteer, surname_volunteer FROM messages AS m, volunteers WHERE recipient='".$_GET['id_task']."' AND messenger = id_volunteer ORDER BY time_message DESC");
+	$messages = $db->query("SELECT m.*, name_volunteer, surname_volunteer FROM messages AS m INNER JOIN volunteers v ON m.messenger = v.id_volunteer WHERE recipient='".hex2bin($_GET['id_task'])."' ORDER BY datetime_message DESC");
 	if($messages->rowCount() != 0){
 		$json['messages'] = '<div id="messages_content">';
 		// On crée un tableau qui continendra notre...tableau
@@ -20,7 +20,7 @@
 		while ($data_message = $messages->fetch()){
 			// Change la couleur dès que l'ID du membre est différent du précédent
 			if($i != 1) {
-				$idNew = $data_message['messenger'];		
+				$idNew = $data_message['messenger'];
 				if($idNew != $id){
 					if($colId == 1) {
 						$color = '#1b8e40';
@@ -41,22 +41,22 @@
 			$text .= '<tr><td style="width:15%" valign="top">';
 			// Si le dernier message est du même membre, on écrit pas de nouveau son pseudo
 			if($prev != $data_message['messenger']){
-				// contenu du message	
+				// contenu du message
 				//$text .= '<a href="#post" onclick="insertLogin(\''.addslashes($data_message['nom'].' '.$data_message['prenom']).'\')" style="color:black">';
-				$text .= date('[d/m/Y H:i:s]', strtotime($data_message['time_message']));
+				$text .= date('[d/m/Y H:i:s]', strtotime($data_message['datetime_message']));
 				$text .= '&nbsp;<span style="color:'.$color.'">'.$data_message['name_volunteer'].' '.$data_message['surname_volunteer'].'</span>';
-				$text .= '</a>';	
+				$text .= '</a>';
 			}else
-			$text .= '</td>';			
+			$text .= '</td>';
 			$text .= '<td style="width:85%;padding-left:10px;" valign="top">';
 
-				
+
 			// On supprime les balises HTML
-			$message = htmlspecialchars($data_message['message']); 
+			$message = htmlspecialchars($data_message['message']);
 
 			// On transforme les liens en URLs cliquables
 			$message = urllink($message);
-				
+
 			// On ajoute le message en remplaçant les liens par des URLs cliquables
 			$text .= $message.'<br />';
 			$text .= '</td></tr>';
@@ -64,7 +64,7 @@
 			$i++;
 			$prev = $data_message['messenger'];
 		}
-			
+
 		/* On crée la colonne messages dans le tableau json
 		qui contient l'ensemble des messages */
 		$json['messages'] = $text;

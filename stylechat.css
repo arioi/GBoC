@@ -17,7 +17,7 @@ a {
 
 /* Bloc contenant la zone de texte et bouton */
 .post_message  {
-	width: 30%;
+	width: 50%;
 	margin: auto;
 	border: 1px solid #d2d2d2;
 	background: #d2d2d2;
@@ -35,21 +35,21 @@ a {
 /* La zone où sont affichés les messages
 et utilisateurs connectés */
 .chat {
-	width: 30%;
+	width: 75%;
 	margin: 10px auto;
 	border: 1px solid #d2d2d2;
 	padding: 0px;
 }
 /* Zone des messages */
 .chat #text-td {
-	margin: 0px; 
-	padding: 5px; 
-	width: 80%; 
-	background: #d2d2d2; 
+	margin: 0px;
+	padding: 5px;
+	width: 80%;
+	background: #d2d2d2;
 }
 
 .chat #text, .chat #users, .chat #users-chat {
-	height:200px; 
+	height:200px;
 	overflow-y: auto;
 }
 .info {

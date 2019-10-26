@@ -1,0 +1,4 @@
+possibilité de supprimer un évènement ou une tâche
+mail aux bénévoles en cas de création ou modification en urgence
+Erreur Claude
+Gestion mot de passe perdu

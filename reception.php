@@ -41,6 +41,7 @@
                 <input type="password" name="password" required="" <?php if(isset($_COOKIE['password'])) echo 'value='.$_COOKIE['password']; ?> size="26"><br>
                 <input type="checkbox" name="save" <?php if(isset($_COOKIE['save'])) echo 'checked'; ?>> Se souvenir de mon identifiant et de mon mot de passe<br>
                 <input type="submit" value="Connexion">
+                <input type="submit" formaction="post_lost_password.php" value="Mot de passe oublié">
             </form>
             <a href="create_account.php">Créer un compte</a>
         </div>

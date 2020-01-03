@@ -72,7 +72,8 @@
                         t.begin_datetime_task,
                         t.end_datetime_task,
                         t.places_task,
-                        t.max_volunteers');
+                        t.max_volunteers
+                        ORDER BY t.begin_datetime_task ');
                     while($data_task=$commission_tasks->fetch()){?>
                         <tr>
                             <td><?php echo $data_task['name_task']?></td>

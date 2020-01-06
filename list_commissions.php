@@ -29,20 +29,20 @@
                         if($data_commission['active']) echo "est active.<br>"; else echo "n'est pas active </li>";
                     } ?></ul>
 
-                    <h2>Créer une nouvelle commission</h2>
+                    <h3>Créer une nouvelle commission</h3>
 
                     <?php $volunteers = $db->query('SELECT id_volunteer, name_volunteer, surname_volunteer, mail FROM volunteers');?>
                     <form method="post" action="post_crud_commission.php">
                         Nom de la commission<br>
-                        <input type="text" name="name" required=""><br>
+                        <input type="text" class="browser-default" name="name" required=""><br>
                         Un moderateur<br>
-                        <input type="text" list="volunteers" name="moderator" required="" size="40"><br>
+                        <input type="text" class="browser-default" list="volunteers" name="moderator" required="" size="40"><br>
                         <datalist id="volunteers">
                             <?php while($data_volunteer=$volunteers->fetch()){
                                 echo '<option value="'.$data_volunteer['name_volunteer'].' '.$data_volunteer['surname_volunteer'].' ('.$data_volunteer['mail'].')"></option>';
                             }?>
                         </datalist>
-                        <input class = "form" type="submit" name="add_commission" value="Ajouter une commission">
+                        <input type="submit" name="add_commission" value="Ajouter une commission">
                     </form>
                 </div>
                 <footer id="pied_de_page"></footer>

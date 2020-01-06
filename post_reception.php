@@ -19,6 +19,7 @@
         }else{
             $_SESSION['uuid'] = $data_volunteer['id_volunteer'];
             $_SESSION['role'] = $data_volunteer['role'];
+            $_SESSION['prenom'] = $data_volunteer['surname_volunteer'];
             if($redirect) {
               header('Location:'. $redirect);
             } else {

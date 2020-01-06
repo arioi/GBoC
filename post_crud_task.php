@@ -26,6 +26,28 @@
                     'end_date'=>$_POST['end_date'].' '.$_POST['end_time'],
                     'places'=>$_POST['places'],
                     'max_volunteers'=>$_POST['max_volunteers']));
+
+                    $volunteers = $db->query('SELECT v.surname_volunteer, v.name_volunteer, v.mail FROM commissions_volunteers cv INNER JOIN volunteers v ON cv.id_volunteer = v.id_volunteer WHERE cv.id_commission = \''.hex2bin($_POST['id_commission']).'\'');
+                    while ($volunteer = $volunteers->fetch()){
+                      $message = '';
+                      $to = $volunteer['mail'];
+                      $subject = 'GBoC - Nouvelle tâche créée';
+                      $message .= nl2br("Bonjour " .$volunteer['surname_volunteer'] .",\n\n");
+                      $message .= nl2br("Une nouvelle tâche a été créée en urgence, merci d'en prendre connaissance : \n" );
+                      $message .= '<table>';
+                      $message .= '<tr><td>'.$_POST['name'].'</td><td>'.date('d/m/y',strtotime($_POST['begin_date'].' '.$_POST['begin_time'])).'</td><td><a href= "http://gestionbenevolesmbtav.fr/volunteer_tasks.php?id_event='.$_POST['id_event'].'">Voir la tâche</a></td></tr>';
+                      $message .= '</table>';
+                      $message .= nl2br("\n\n");
+
+                    $headers = "MIME-Version: 1.0" . "\n";
+                    $headers .= "Content-type: text/html; charset=utf-8" . "\r\n";
+
+                    // En-têtes additionnels
+                    $headers .= 'From: GBoC@mbtav.fr' . "\r\n";
+                    if( ((strtotime($_POST['begin_date']) - time()) / (60 * 60 * 24)) < 8 ){
+                        $resultat = mail($to, utf8_decode($subject), $message, $headers);
+                    }
+                  }
                 header('location: commission_tasks.php?id_event='.$_POST['id_event'].'&id_commission='.$_POST['id_commission']);
             }
 
@@ -42,6 +64,15 @@
                 header('location: task.php?id_task='.$_POST['id_task']);
             }
         }
+    }
+    if (isset($_POST['RemoveTask'])) {
+      $delete_volunteers = $db->prepare('DELETE FROM task_volunteer WHERE hex(id_task) = :task');
+      $delete_volunteers->execute(array(
+        'task' => $_POST['id_task']));
+      $delete_task = $db->prepare('DELETE FROM tasks WHERE hex(id_task) = :task');
+      $delete_task->execute(array(
+        'task' => $_POST['id_task']));
+      header('location: commission_tasks.php?id_commission='.$_POST['id_commission'].'&id_event='.$_POST['id_event']);
     }
 
     if(isset($_POST['undertaking'])){

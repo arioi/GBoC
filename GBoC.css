@@ -1,247 +1,603 @@
-	#menu {
-
+@media all and (min-width:425px) {
+	/************************ GENERAL ************************/
+	body {
+		font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+		line-height: 1;
+		width: 100% !important;
 	}
-	#menu ul, #menu li {
+
+	#navbarDiv {
+		background: #2a2a2a;
+		height: 40px;
+	}
+
+	#navbarIcon {
+		color: white;
+		height: 30px;
+		margin-top: 7px;
+		width: 30px;
+	}
+
+	#slide-out {
+		background: #2a2a2a;
+		width: 150px;
+	}
+
+	#slide-out li a ,#slide-out li a i {
+		color: white;
+	}
+
+	.niv1 {
+		background: #2a2a2a;
+	}
+
+	.niv2 {
+		background: #4d4d4d;
+	}
+
+	.niv3 {
+		background: #666666;
+	}
+
+	.niv1, .niv2, .niv3 {
+		border-bottom: 1px solid #4682b4;
+	}
+
+	#menu {
+		display: none;
+	}
+
+	/*#menu ul, #menu li {
 		margin: 0;
 		padding: 0;
 		list-style-type: none;
  		text-align:center;
+	}*/
+
+	h2 {
+		/*border-bottom: 2px solid #4682b4;*/
+		font-size: 2.3rem !important;
+		text-align: center;
+		text-decoration: underline; /* soulignement*/
+		text-decoration-color: #4682b4; /* couleur du soulignement*/
+		text-transform: uppercase;
 	}
-	#menu li {
+
+	h3 {
+		color: #4682b4;
+		/*font-size: 32px;*/
+		font-size: 2rem !important;
+		margin-left: 1% !important;
+		text-align: left;
+	}
+
+	h4 {
+	    font-size: 1.5rem !important;
+	    margin-left: 1% !important;
+	}
+
+	/***********************TABLEAU****************************/
+	table {
+		border: 1px solid #cccccc !important;
+		background-color: #EEEEEE;
+		border-collapse: collapse;
+		box-shadow: 2px 2px 2px #cccccc !important;
+		text-align: left;
+		width: 100% !important;
+	}
+
+	table td, table th {
+	 	border: 1px solid #AAAAAA;
+	 	padding: 3px 2px;
+	 	text-align: center !important;
+	}
+
+	table tbody td {
+	 	font-size: 10px !important; /*13px*/
+	}
+
+	table tr:nth-child(even) {
+	 	background: #D0E4F5;
+	}
+
+	table thead {
+	 	background: #4682B4;
+	 	background: -moz-linear-gradient(top, #74a1c7 0%, #588ebb 66%, #4682B4 100%);
+	 	background: -webkit-linear-gradient(top, #74a1c7 0%, #588ebb 66%, #4682B4 100%);
+	 	background: linear-gradient(to bottom, #74a1c7 0%, #588ebb 66%, #4682B4 100%);
+	 	border-bottom: 2px solid #444444;
+	}
+
+	table thead th, table tbody th {
+		font-size: 10px !important; /*15px*/
+		font-weight: bold;
+		/*color: #FFFFFF;*/
+		/*border-left: 2px solid #D0E4F5;*/
+	}
+
+	table thead th:first-child {
+		border-left: none;
+	}
+	/**********************************************************/
+	#corps div:not(.notClear) {
+		clear: both;
+	}
+
+	nav {
+		overflow: hidden;
+	}
+
+	fieldset {
+		border: none;
+	}
+
+	legend {
+		font-size: 1.4em;
+		margin-bottom: 10px;
+	}
+
+	label {
+		display: block;
+		margin-bottom: 8px;
+	}
+
+	input[type="text"]:focus,
+	input[type="date"]:focus,
+	input[type="datetime"]:focus,
+	input[type="email"]:focus,
+	input[type="number"]:focus,
+	input[type="search"]:focus,
+	input[type="time"]:focus,
+	input[type="url"]:focus,
+	textarea:focus,
+	select:focus{
+		background: #d2d9dd;
+	}
+	select{
+		-webkit-appearance: menulist-button;
+		height:35px;
+	}
+	.number {
+		background: #1abc9c;
+		color: #fff;
+		height: 30px;
+		width: 30px;
+		display: inline-block;
+		font-size: 0.8em;
+		margin-right: 4px;
+		line-height: 30px;
+		text-align: center;
+		text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+		border-radius: 15px 15px 15px 0px;
+	}
+
+	form {
+		border: 1px solid rgba(0,0,0,.125);
+		border-radius: 10px;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		-moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		-webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		margin: auto;
+		padding: 2%;
+		width: 90%;
+	}
+
+	/*form span {
+		font-size: 2rem;
+	}*/
+
+	input[type="text"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="time"], input[type="url"], input[type="password"], textarea, select {
+		background: rgba(255,255,255,.1);
+		background-color: #e8eeef;
+		border: none;
+		border-radius: 4px;
+		box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+		-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		color:#8a97a0;
+		font-family: Georgia, "Times New Roman", Times, serif;
+		/*font-size: 15px;*/
+		/*font-size: 2rem;*/
+		margin: 0;
+		margin-bottom: 30px;
+		padding: 10px;
+		outline: 0;
+		width: 100%;
+	}
+
+	input[type="submit"], input[type="button"] {
+		position: relative;
+		display: block;
+		padding: 19px 39px 18px 39px;
+		color: #FFF;
+		margin: 0 auto;
+		background: #1abc9c;
+		text-align: center;
+		font-style: normal;
+		border: 1px solid #16a085;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+	}
+
+	input[type="submit"]:hover, input[type="button"]:hover {
+		background: #109177;
+	}
+
+	input[type="checkbox"] {
+		height: 20px;
+		width: 20px;
+	}
+	/*********************************************************/
+	/********************* RECEPTION.PHP *********************/
+	#corps h1, #newAccountDiv h1 {
+		font-family: "Open Sans", Helvetica, Arial, sans-serif;
+		text-align: center;
+	}
+
+	#corps p, #newAccountDiv p {
+		color: #4682B4;
+		font-family: "Open Sans", Helvetica, Arial, sans-serif;
+		font-size: 0.875rem;
+		line-height: 1;
+		text-align: center;
+	}
+
+	#login {
+		font-size: 20px;
+	}
+	/*********************************************************/
+	/****************** CREATE_ACCOUNT.PHP *******************/
+	#charteHref, #recepHref {
+		color: #4682B4;
+		text-decoration: none;
+	}
+
+	#charteHref:hover, #recepHref:hover {
+		color: #999999;
+		text-decoration: none;
+	}
+	/*********************************************************/
+	/***************** VOLUNTEER_EVENTS.PHP ******************/
+	#divHeader {
+		margin-bottom: 3%;
+	}
+
+	#logoTav {
+		display: inline-block;
+		vertical-align: middle;
+		width: 22%;
+	}
+
+	#hello {
+		display: inline-block;
+		text-transform: uppercase;
+		vertical-align: middle;
+	}
+
+	#h2ve {
+		width: 85%;
+	}
+
+	#tableVe {
+		max-height: 300px;
+		overflow: auto;
+	}
+
+	#zoomIcon  {
+		display:block;
+	}
+
+	#seeTask {
+		display: none;
+	}
+
+	.myform {
+		border: none;
+    	border-radius:0;
+    	box-shadow:none;
+    	-moz-box-shadow: none;
+    	-webkit-box-shadow: none;
+    	cursor: pointer;
+    	margin: auto;
+    	padding:0;
+	}
+	/*********************************************************/
+	/*********************** TASK.PHP ************************/
+	#dateTaskTable {
+		margin:auto;
+		margin-bottom: 2%;
+		width: 90% !important;
+	}
+
+	#dateTaskTable {
+		cursor: text;
+	}
+
+	#dateTaskTable td input {
+		text-align: center !important;
+	}
+
+	.browser-default {
+		background-color: #e8eeef !important;
+		margin-bottom: 10px !important;
+	}
+
+	.dateTaskInput {
+		border-bottom: none !important;
+	}
+
+	#max_volunteers, #max_volunteersComTask, #max_volunteersListEvent {
+		text-align: center !important;
+		width: 50% !important;
+	}
+
+	#volunForm {
+		margin-bottom: 10%;
+	}
+
+	#selVolunteer {
+		display: block;
+	    margin: auto;
+	    width: 80%;
+	}
+	/*********************************************************/
+	/***************** COMMISSION_TASKS.PHP ******************/
+	#comTaskBegDateInput, #comTaskFinDateInput, #listEventBegDateInput, #listEventFinDateInput {
+		display: inline-block !important;
+		width: 40% !important;
+	}
+
+	#comTaskBegTimeInput, #comTaskFinTimeInput, #listEventBegTimeInput, #listEventFinTimeInput {
+		display: inline-block !important;
+		width: 40% !important;
+	}
+	/*********************************************************/
+	/***************** LIST_COMMISSIONS.PHP ******************/
+	#simple_list {
+		border:1px solid #d9d9d9 !important;
+		border-radius: 10px;
+		box-shadow: 0 8px 10px 0 #d9d9d9;
+    	margin: auto;
+    	text-align: center;
+    	width: 90%;
+	}
+
+	#simple_list ul {
+		list-style-type: circle;
+		list-style-position: inside;
+	}
+
+	#simple_list li {
+		padding: 5px;
+		margin: 0px;
+	}
+}
+
+@media all and (min-width:768px) {
+	/* d�sactivation du menu mobile */
+	#navbarDiv {
+		display: none;
+	}
+
+	/* activation du menu normal */
+	#menu {
+		display: block;
+		height: 40px !important;
+		width:100% !important;
+		/*font-size: 0.5rem !important;*/
+	}
+
+	#menu ul, #menu li {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+ 		text-align:center;
+	}
+	#menu li.liNiveau1 {
+		cursor: pointer;
 		float:left;
  		margin:auto;
  		padding:0;
+ 		width: 16.667% !important;
 	}
-	#menu li a {
-		display: block;
-		text-decoration: none;
-		text-align: center;
-		vertical-align: middle;
-		border: 1px solid #fff;
+	#menu li.liNiveau1 a {
+		background: #2a2a2a;
+		border-bottom: 3px solid #4682b4;
+		border-left: 1px solid #fff;
+		border-right: 1px solid #fff;
 		color: white;
-		background: black;
+		display: block;
 		height: 40px;
-		width: 150px;
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+		width: 100%;
 	}
-	#menu li a:hover {
+	#menu li.liNiveau1 a:hover {
 		color: white;
 		background: #4682b4;
 	}
 	/*---------- Niveau 1 ----------*/
-	#menu .niveau1 li {
+	#menu ul.niveau1 li {
 		float: left;
 		margin: 0 -1px 0 0;
 	}
-	#menu .niveau1 li a {
+
+	#menu ul.niveau1 li a {
 		padding: 5px 0;
 	}
-	#menu .niveau1 li:hover a,
-	#menu .niveau1 li a:hover {
+
+	#menu ul.niveau1 li:hover a, #menu ul.niveau1 li a:hover {
 		float:none;
 	}
+
 	/*---------- Niveau 2 ----------*/
-		#menu .niveau2 {
+		#menu ul.niveau2 {
 			position: absolute;
 			top: -9999em;
+			width: 16.667% !important;
 		}
-		#menu .niveau2 li {
+
+		#menu ul.niveau2 li.liNiveau2 {
 			clear: left;
+			cursor: pointer;
 			margin: -1px 0 0;
+			width: 100% !important;
 		}
-		#menu .niveau2 li a {
+		#menu ul.niveau2 li.liNiveau2 a {
 		}
-		#menu .niveau2 li a:hover {
+
+		#menu ul.niveau2 li.liNiveau2 a:hover {
 		}
-		#menu li:hover .niveau2,
-		#menu .sfhover .niveau2 {
+
+		#menu li:hover ul.niveau2, #menu .sfhover ul.niveau2 {
 			top: auto;
 			min-height: 0; /* corrige un bug IE7 */
 		}
+
 		/*---------- Niveau 3 ----------*/
-		#menu .niveau1 .niveau2 .niveau3 {
+		#menu ul.niveau1 ul.niveau2 ul.niveau3 {
 			position: absolute;
 			top: -9999em;
 			border-top: 1px solid #fff; /* corrige un bug IE6 */
 		}
-		#menu .niveau3 li a {
-		}
-		#menu .niveau3 li:hover a,
-		#menu .niveau3 li a:hover {
-		}
-		#menu .niveau2 li:hover .niveau3,
-		#menu .niveau2 .sfhover .niveau3 {
+
+		#menu ul.niveau2 li:hover ul.niveau3, #menu ul.niveau2 .sfhover ul.niveau3 {
 			top: auto;
-			margin:-28px 0 0 149px;
+			margin-top:-28px;
+			margin-left: 100% !important;
 		}
-		#menu .inverse .niveau2 li:hover .niveau3,
-		#menu .inverse .niveau2 .sfhover .niveau3 {
+
+		/*#menu .inverse ul.niveau2 li:hover ul.niveau3, #menu .inverse ul.niveau2 .sfhover ul.niveau3 {
 			top: auto;
-			margin:-28px 0 0 -149px;
-		}
+			margin:-28px 0 0 -127.5px;
+		}*/
 
-body{
+	form {
+		width: 70%;
+	}
 
-		    line-height: 1;
-				font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-		}
-		h3 {
-			font-size: 32px;
-				font-size: 2rem;
-				text-align: left;
-				color: #4682b4;
-		}
+	form span {
+		font-size: 1.3rem;
+	}
 
-/***********************TABLEAU****************************/
-table {
-  border: 1px solid #1C6EA4;
-  background-color: #EEEEEE;
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-table td, table th {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
-}
-table tbody td {
-  font-size: 13px;
-}
-table tr:nth-child(even) {
-  background: #D0E4F5;
-}
-table thead {
-  background: #4682B4;
-  background: -moz-linear-gradient(top, #74a1c7 0%, #588ebb 66%, #4682B4 100%);
-  background: -webkit-linear-gradient(top, #74a1c7 0%, #588ebb 66%, #4682B4 100%);
-  background: linear-gradient(to bottom, #74a1c7 0%, #588ebb 66%, #4682B4 100%);
-  border-bottom: 2px solid #444444;
-}
-table thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  border-left: 2px solid #D0E4F5;
-}
-table thead th:first-child {
-  border-left: none;
+	#logoTav {
+		width: 15%;
+	}
+
+	#h2ve {
+		margin-top: 10%;
+		width: 48%
+	}
+
+	table tbody th, table tbody td {
+		font-size: 13px !important; /*13px*/
+	}
+
+	.browser-default:not(.max_volunteers) {
+		display: block;
+		margin:auto;
+		width: 70% !important;
+	}
+
+	#max_volunteers, #max_volunteersComTask, #max_volunteersListEvent {
+		width: 30% !important;
+	}
+
+	#create_task, #userUnsubscribeForm {
+		width: 40% !important;
+	}
+
+	#simple_list {
+		width: 50%;
+	}
 }
 
+@media all and (min-width:1024px) {
+	form {
+		width: 35%;
+	}
 
-#simple_list ul
-{
-list-style-type: circle;
-list-style-position: inside;
-}
-#simple_list li
-{
-padding: 5px;
-margin: 0px;
-}
+	form span {
+		font-size: 1rem;
+	}
 
-#corps div {
-	clear: both;
-}
+	input[type="text"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="time"], input[type="url"], input[type="password"], textarea, select {
+		font-size: 1rem;
+	}
 
-nav {
-overflow: hidden;
-}
+	input[type="checkbox"] {
+		height: 15px;
+		width: 15px;
+	}
 
+	#login {
+		font-size: 22px;
+	}
 
-fieldset{
-	border: none;
-}
-legend {
-	font-size: 1.4em;
-	margin-bottom: 10px;
-}
-label {
-	display: block;
-	margin-bottom: 8px;
-}
-input[type="text"],
-input[type="date"],
-input[type="datetime"],
-input[type="email"],
-input[type="number"],
-input[type="search"],
-input[type="time"],
-input[type="url"],
-input[type="password"],
-textarea,
-select {
-	font-family: Georgia, "Times New Roman", Times, serif;
-	background: rgba(255,255,255,.1);
-	border: none;
-	border-radius: 4px;
-	font-size: 15px;
-	margin: 0;
-	outline: 0;
-	padding: 10px;
-	width: 100%;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	background-color: #e8eeef;
-	color:#8a97a0;
-	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	margin-bottom: 30px;
-}
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="datetime"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-input[type="search"]:focus,
-input[type="time"]:focus,
-input[type="url"]:focus,
-textarea:focus,
-select:focus{
-	background: #d2d9dd;
-}
-select{
-	-webkit-appearance: menulist-button;
-	height:35px;
-}
-.number {
-	background: #1abc9c;
-	color: #fff;
-	height: 30px;
-	width: 30px;
-	display: inline-block;
-	font-size: 0.8em;
-	margin-right: 4px;
-	line-height: 30px;
-	text-align: center;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-	border-radius: 15px 15px 15px 0px;
+	#menu li a {
+		width: 150px;
+	}
+
+	#logoTav {
+		width: 10%;
+	}
+
+	#h2ve {
+		width: 38%;
+	}
+
+	table {
+		margin: auto;
+		text-align: center;
+		width: 90% !important;
+	}
+
+	table tbody th {
+		font-size: 15px !important;
+	}
+
+	table tbody td {
+		font-size: 13px !important;
+	}
+
+	#tableVe {
+		max-height: 200px;
+	}
+
+	.myform {
+		width: 100%;
+	}
+
+	#volunteersTaskTable, #volunteersUndertakingTable {
+		width: 70% !important;
+	}
+
+	#userInfosForm, #userPwdForm {
+		width: 60%;
+	}
+
+	#userUnsubscribeForm {
+		width: 20% !important;
+	}
+
+	#simple_list {
+		width: 35%;
+	}
 }
 
-input[type="submit"],
-input[type="button"]
-{
-	color: #FFF;
-	background: #4682b4;
-	font-size: 14px;
-	text-align: left;
-	font-style: normal;
-	border: 1px solid #4682b4;
-	margin-bottom: 10px;
-}
-input[type="submit"]:hover,
-input[type="button"]:hover
-{
-	background: grey;
-}
+@media all and (min-width: 1440px) {
+	#logoTav {
+		width: 7%;
+	}
 
-.table
-{
-	padding: 5px 39px 5px 39px;
-	width: 100%;
-}
+	#h2ve {
+	    width: 28%;
+	}
 
-.form
-{
-	padding: 19px 39px 18px 39px;
-	width: 30%;
+	#userInfosForm, #userPwdForm {
+		width: 50%;
+	}
 }

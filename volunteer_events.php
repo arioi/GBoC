@@ -16,9 +16,9 @@
     <body>
         <?php include("menus.php"); ?>
         <div id="corps">
-            <h1>Liste des événements</h1>
+            <h2 id="h2ve">Liste des événements</h2>
             <h3>Evénement à venir</h3>
-            <table>
+            <table id="tableVe">
                 <tr>
                     <th>Nom</th>
                     <th>Description</th>
@@ -26,6 +26,7 @@
                     <th>Date et heure de fin</th>
                     <th>Lieux</th>
                     <th>Commission(s)</th>
+                    <th>&nbsp;&nbsp;</th>
                 </tr>
                 <?php $events=$db->prepare('SELECT DISTINCT
                     e.id_event,
@@ -59,9 +60,12 @@
                         <td><?php echo date("d/m/Y H:i", strtotime($data_event['end_datetime_event'])) ?></td>
                         <td><?php echo $data_event['places_event'] ?></td>
                         <td><?php echo $data_event['Commissions'] ?></td>
-                        <td><form method="post" action=<?php echo '"volunteer_tasks.php?id_event='.bin2hex($data_event['id_event']).'"' ?>>
-                            <input class="table" type="submit" name="taches" value="Voir les tâches">
-                        </form></td>
+                        <td><a id="zoomIcon" href=<?php echo '"volunteer_tasks.php?id_event='.bin2hex($data_event['id_event']).'"' ?> title="Voir la tâche"><i class="material-icons">zoom_in</i></a> <!-- pour format mobile-->
+                            <!--<form id="myform" class="myform" method="post" action=<?php //echo '"volunteer_tasks.php?id_event='.bin2hex($data_event['id_event']).'"' ?>>
+                                <a id="zoomIcon" href="#" title="Voir la tâche" onclick="document.getElementById('myform').submit()"><i class="material-icons">zoom_in</i></a>
+                                <input id="seeTask" type="submit" name="taches" value="Voir les tâches">!-->
+                            </form>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>

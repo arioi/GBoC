@@ -122,6 +122,24 @@
                     }
                 header('location: event_tasks.php?id='.$_POST['id']);
             }
+            if(isset($_POST['RemoveEvent'])){
+              $tasks = $db->query('SELECT * FROM events WHERE hex(id_event) = \''.$_POST['id_event'].'\' ');
+              while($task=$tasks->fetch()){
+                $delete_volunteers = $db->prepare('DELETE FROM task_volunteer WHERE hex(id_task) = :task');
+                $delete_volunteers->execute(array(
+                  'task' => bin2hex($task['id_task'])));
+                $delete_task = $db->prepare('DELETE FROM tasks WHERE hex(id_task) = :task');
+                $delete_task->execute(array(
+                  'task' => bin2hex($task['id_task'])));
+              }
+              $delete_commission = $db->prepare('DELETE FROM event_commission WHERE hex(id_event) = :event');
+              $delete_commission->execute(array(
+                'event' => $_POST['id_event']));
+              $delete_event = $db->prepare('DELETE FROM events WHERE hex(id_event) = :event');
+              $delete_event->execute(array(
+                'event' => $_POST['id_event']));
+              header('location: list_events.php');
+            }
         }
     }
 ?>

@@ -7,12 +7,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>GBoC - inscription</title>
         <link rel="stylesheet" type="text/css" href="GBoC.css" media="all"/>
     </head>
 
     <body>
-        <div id="corps">
+        <div id="newAccountDiv">
             <h1>Inscription au module de Gestion des Bénévoles Ou des Commissions</h1>
 
             <p>
@@ -42,8 +43,8 @@
                 <input type="password" name="password" required="" size="26"><br>
                 Répétez le mot de passe* :<br>
                 <input type="password" name="password_repeated" required="" size="26"><br>
-                <input type="checkbox" name="charte" required=""> J'ai pris connaissance et j'accepte la <a href="charte.html" target="_blank">Charte d'utilisation</a><br>
-                <input class="form" type="submit" value="S'inscrire">
+                <input type="checkbox" name="charte" required=""> J'ai pris connaissance et j'accepte la <a id="charteHref" href="charte.html" target="_blank">Charte d'utilisation</a><br>
+                <input type="submit" value="S'inscrire">
             </form>
             <?php
                 if(isset($_GET['error'])){
@@ -54,7 +55,7 @@
                     }
                 }
             ?>
-            <a href="reception.php">Retourner à la page de connexion</a><br>
+            <a id="recepHref" href="reception.php">Retourner à la page de connexion</a><br>
         </div>
     </body>
 </html>

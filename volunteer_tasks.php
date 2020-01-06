@@ -12,12 +12,13 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>GBoC - Liste des tâches</title>
     </head>
     <body>
         <?php include("menus.php"); ?>
         <div id="corps">
-            <h1>Liste des tâches</h1>
+            <h2>Liste des tâches</h2>
             <h3>Evénement</h3>
             <table>
                 <tr>
@@ -52,6 +53,8 @@
                         <th>Date et heure de fin</th>
                         <th>Lieux</th>
                         <th>Nombre de bénévoles manquant</th>
+						<th>&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;</th>
                     </tr>
                     <?php
                     $commission_tasks = $db->query('SELECT hex(t.id_task) id_task,
@@ -82,30 +85,37 @@
                             <td><?php echo date("d/m/Y H:i", strtotime($data_task['end_datetime_task']))?></td>
                             <td><?php echo $data_task['places_task']?></td>
                             <td><?php echo $data_task['max_volunteers']-$data_task['volunteers']?></td>
-                            <td><form method="post" action=<?php echo '"task.php?id_task='.$data_task['id_task'].'"'?>>
-                                <input type="submit" name="task" value="Voir la tâche">
-                            </form></td>
-                            <td><form method="post" action="post_crud_task.php">
-                                <input type="hidden" name="id_volunteer" value=<?php echo'"'.bin2hex($_SESSION['uuid']).'"'?>>
-                                <input type="hidden" name="id_task" value=<?php echo'"'.$data_task['id_task'].'"'?>>
-                                <input type="hidden" name="id_event" value=<?php echo'"'.$_GET['id_event'].'"'?>>
-                                <input type="hidden" name="id_commission" value=<?php echo'"'.bin2hex($task['id_commission']).'"'?>>
-                                <?php $volunteers = $db->query('SELECT * FROM task_volunteer WHERE hex(id_task) = \''.$data_task['id_task'].'\'');
-                                $engagement = 0;
-                                while ($volunteer=$volunteers->fetch()){
-                                  if ($volunteer['id_volunteer'] == $_SESSION['uuid']){
-                                    $engagement = 1;
-                                  }
-                                }
-                                  if ($engagement == 1){ ?>
-                                      <input class="table" type="submit" name="unsubscribe" value="Se désengager">
-                                  <?php
-                                } else {
-                                  ?>
-                                  <input class="table" type="submit" name="undertaking" value="S'engager">
-                                <?php
-                                } ?>
-                            </form></td>
+                            <td><a id="zoomIcon" href=<?php echo '"task.php?id_task='.$data_task['id_task'].'"'?> name="task" title="Voir la tâche" onclick="document.getElementById('formComTask').submit()"><i class="material-icons">zoom_in</i></a></td>
+                            <td>
+                                <form id="suscribeForm" class="myform" method="post" action="post_crud_task.php">
+                                    <input type="hidden" name="id_volunteer" value=<?php echo'"'.bin2hex($_SESSION['uuid']).'"'?>>
+                                    <input type="hidden" name="id_task" value=<?php echo'"'.$data_task['id_task'].'"'?>>
+                                    <input type="hidden" name="id_event" value=<?php echo'"'.$_GET['id_event'].'"'?>>
+                                    <input type="hidden" name="id_commission" value=<?php echo'"'.bin2hex($task['id_commission']).'"'?>>
+                                    <?php $volunteers = $db->query('SELECT * FROM task_volunteer WHERE hex(id_task) = \''.$data_task['id_task'].'\'');
+                                    $engagement = 0;
+                                    while ($volunteer=$volunteers->fetch()){
+                                    if ($volunteer['id_volunteer'] == $_SESSION['uuid']){
+                                        $engagement = 1;
+                                    }
+                                    }
+                                    if ($engagement == 1) { ?>
+                                            <input type='image' src='img/cancel.png' width='23' height='23' title="Se désengager" onFocus='form.submit' name='btn_opentextbox'/>
+                                          <!--  <a id="unsubscribe" href="#" name="unsubscribe" title="Se désengager" onclick="document.getElementById('suscribeForm').submit()">
+                                                <i class="material-icons">cancel</i>
+                                            </a>-->
+                                            <input type="hidden" name="unsubscribe" value="Se désengager">
+                                      <?php
+                                    } else { ?>
+                                        <input type='image' src='img/add.png' width='23' height='23' title="S'engager" onFocus='form.submit' name='btn_opentextbox'/>
+                                        <!--<a id="undertaking" href="#" name="undertaking" title="S'engager" onclick="document.getElementById('suscribeForm').submit()">
+                                            <i class="material-icons">add_circle</i>
+                                        </a>-->
+                                        <input type="hidden" name="undertaking" value="S'engager">
+                                    <?php
+                                    } ?>
+                                </form>
+                            </td>
                         </tr>
                     <?php } ?>
                 </table>

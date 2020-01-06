@@ -46,7 +46,7 @@
                                       <td><form method="post" action="post_crud_commission.php">
                                           <input type="hidden" name="id_moderator" value=<?php echo'"'.bin2hex($info_moderator['id_volunteer']).'"'?>>
                                           <input type="hidden" name="id_commission" value=<?php echo'"'.bin2hex($commission['id_commission']).'"'?>>
-                                          <input class="table" type="submit" name="remove_moderator" value="Retirer moderateur">
+                                          <input type="submit" name="remove_moderator" value="Retirer moderateur">
                                       </form></td>
                                     }
                           <?php } ?>

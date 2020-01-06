@@ -22,19 +22,19 @@
                     <h3>Créer un événement</h3>
                     <form method="post" action="post_crud_event.php" id="create_event">
                         Nom de l'événement:<br>
-                        <input type="text" name="name" required=""<?php if(isset($_GET['name'])) echo 'value="'.str_replace('+',' ',$_GET['name']).'"' ?> ><br>
+                        <input type="text" name="name" class="browser-default" required=""<?php if(isset($_GET['name'])) echo 'value="'.str_replace('+',' ',$_GET['name']).'"' ?> ><br>
                         Description de l'événement:<br>
-                        <textarea rows="4" cols="50" name="info" form="create_event"><?php if(isset($_GET['info'])) echo str_replace('+',' ',$_GET['info'])?></textarea><br>
+                        <textarea class="browser-default" rows="4" cols="50" name="info" form="create_event"><?php if(isset($_GET['info'])) echo str_replace('+',' ',$_GET['info'])?></textarea><br>
                         Date et heure de début:<br>
-                        <input type="date" name="begin_date" required=""<?php if(isset($_GET['begin_date'])) echo 'value="'.$_GET['begin_date'].'"' ?>>
-                        <input type="time" name="begin_time" required=""<?php if(isset($_GET['begin_time'])) echo 'value="'.$_GET['begin_time'].'"' ?>><br>
+                        <input type="date" id="listEventBegDateInput" class="browser-default dateTimeInput" name="begin_date" required=""<?php if(isset($_GET['begin_date'])) echo 'value="'.$_GET['begin_date'].'"' ?>>
+                        <input type="time" id="listEventBegTimeInput" class="browser-default dateTimeInput" name="begin_time" required=""<?php if(isset($_GET['begin_time'])) echo 'value="'.$_GET['begin_time'].'"' ?>><br>
                         Date et heure de fin:<br>
-                        <input type="date" name="end_date" required=""<?php if(isset($_GET['end_date'])) echo 'value="'.$_GET['end_date'].'"' ?>>
-                        <input type="time" name="end_time" required=""<?php if(isset($_GET['end_time'])) echo 'value="'.$_GET['end_time'].'"' ?>><br>
+                        <input type="date" id="listEventFinDateInput" class="browser-default dateTimeInput" name="end_date" required=""<?php if(isset($_GET['end_date'])) echo 'value="'.$_GET['end_date'].'"' ?>>
+                        <input type="time" id="listEventFinTimeInput" class="browser-default dateTimeInput" name="end_time" required=""<?php if(isset($_GET['end_time'])) echo 'value="'.$_GET['end_time'].'"' ?>><br>
                         Lieux de l'événement (à la mission bretonne par défaut):<br>
-                        <input type="text" name="places"<?php if(isset($_GET['places'])) echo 'value="'.str_replace('+',' ',$_GET['places']).'"' ?> ><br>
+                        <input type="text" class="browser-default" name="places"<?php if(isset($_GET['places'])) echo 'value="'.str_replace('+',' ',$_GET['places']).'"' ?> ><br>
                         Nombre de personne attendu:<br>
-                        <input type="number" name="expected"<?php if(isset($_GET['expected'])) echo 'value="'.$_GET['expected'].'"' ?>><br>
+                        <input type="number" id="max_volunteersListEvent" class="browser-default max_volunteers" name="expected"<?php if(isset($_GET['expected'])) echo 'value="'.$_GET['expected'].'"' ?>><br>
                         Commissions participantes:<br>
                         <?php
                             $commissions = $db->query('SELECT * FROM commissions WHERE active');
@@ -42,13 +42,13 @@
                                 echo '<input type="checkbox" name ="'.$data_commission['name_commission'].'" value="'.bin2hex($data_commission['id_commission']).'">'.$data_commission['name_commission'].'<br>';
                             }
                         ?>
-                        <input class="form" type="submit" name="create_event" value="Créer l'événement">
+                        <input type="submit" name="create_event" value="Créer l'événement">
                     </form>
                     <?php if(isset($_GET['error']) && $_GET['error'] == 'date'){
                         echo "Attention, l'événement se termine avant qu'il ne commence";
                     }?>
 
-                    <h3>Evénement à venir</h3>
+                    <h3>Evénement(s) à venir</h3>
                     <table>
                         <tr>
                             <th>Nom</th>
@@ -58,6 +58,8 @@
                             <th>Lieu(x)</th>
                             <th>Nombre de personne attendu</th>
                             <th>Commissions participantes</th>
+                            <th>&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;</th>
                         </tr>
                         <?php $events=$db->query('SELECT DISTINCT
                             e.id_event,
@@ -97,14 +99,12 @@
                                     //echo $data_commission['name_commission'];
                                     //while($data_commission = $commissions->fetch()) echo ', '.$data_commission['name_commission']?>
                                 </td>
-                                <td><form method="post" action=<?php echo '"event_tasks.php?id='.bin2hex($data_event['id_event']).'"';?>>
-                                    <input class="table" type="submit" value="Voir les tâches">
-                                </form></td>
+                                <td><a id="zoomIcon" href=<?php echo '"event_tasks.php?id='.bin2hex($data_event['id_event']).'"';?> name="task" title="Voir les tâches"><i class="material-icons">zoom_in</i></a></td>
                             </tr>
                         <?php } ?>
                     </table>
 
-                    <h3>Evénements passé</h3>
+                    <h3>Evénement(s) passé(s)</h3>
                     <table>
                         <tr>
                             <th>Nom</th>
@@ -112,8 +112,10 @@
                             <th>Date et heure de début</th>
                             <th>Date et heure de fin</th>
                             <th>Lieu(x)</th>
-                            <th>Nombre de personne attendu</th>
+                            <th>Nombre de personnes attendues</th>
                             <th>Commissions participantes</th>
+                            <th>&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;</th>
                         </tr>
                         <?php $events=$db->query('SELECT DISTINCT
                             e.id_event,
@@ -153,9 +155,13 @@
                                   //echo $data_commission['name_commission'];
                                   //while($data_commission = $commissions->fetch()) echo ', '.$data_commission['name_commission']?>
                               </td>
-                                <td><form method="post" action=<?php echo '"event_tasks.php?id='.bin2hex($data_event['id_event']).'"';?>>
-                                    <input class="table" type="submit" value="Voir les tâches">
-                                </form></td>
+                                <td><a id="zoomIcon" href=<?php echo '"event_tasks.php?id='.bin2hex($data_event['id_event']).'"';?> name="task" title="Voir les tâches"><i class="material-icons">zoom_in</i></a></td>
+                                <td>
+                                    <form id="userWishlistComForm" class="myform" method="post" action="post_crud_event.php">
+                                        <input type="hidden" name="id_event" value=<?php echo'"'.bin2hex($data_event['id_event']).'"'?>>
+                                        <button type="submit" name="RemoveEvent" title = "Supprimer l'événement'" value=" "><img src="img/delete.png" width="23" height="23" alt="submit" border="0" /></button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php } ?>
                     </table>

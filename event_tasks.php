@@ -78,7 +78,7 @@
 	                        ?>
 	                        <br>
 	                        <input type="hidden" name="id" value= <?php echo '"'.bin2hex($event['id_event']).'"'?>>
-	                        <input class="form" type="submit" name="update_event" value="Modifier l'événement">
+	                        <input type="submit" name="update_event" value="Modifier l'événement">
 	                    </form>
 	                <?php }else{ ?>
 	                	<table>
@@ -138,8 +138,9 @@
 		                            <td><?php echo date("d/m/Y H:i", strtotime($data_task['end_time_task']))?></td>
 		                            <td><?php echo $data_task['places_task']?></td>
 		                            <td><?php echo $data_task['max_volunteers']-$data_task['volunteers']?></td>
-		                            <td><form method="post" action=<?php echo "task.php?id_task=".bin2hex($data_task['id_task']) ?>>
-		                                <input class="table" type="submit" value="Voir la tache">
+		                            <td><form id="myform" class="myform" method="post" action=<?php echo "task.php?id_task=".bin2hex($data_task['id_task']) ?>>
+                                  <a id="zoomIcon" href="#" title="Voir la tâche" onclick="document.getElementById('myform').submit()"><i class="material-icons">zoom_in</i></a> <!-- pour format mobile-->
+                                  <input id="seeTask" type="submit" name="taches" value="Voir les tâches">
 		                            </form></td>
 		                        </tr>
 		                    <?php } ?>

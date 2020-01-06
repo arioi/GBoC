@@ -5,6 +5,7 @@
         header('location: reception.php');
     }
     $db = connecting_db();
+
     if($_SESSION['role'] != 'ADMIN'){
         echo 'Vous n\'avez pas les droits pour accéder à cette page';
     }else{
@@ -17,10 +18,14 @@
                 </head>
 
                 <body>
+                  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous">
+                  </script>
+                  <script src="src/fancyTable.js"></script>
                     <?php include("menus.php"); ?>
                     <div id="corps">
                         <h1>Liste des bénévoles</h1>
-                        <table>
+                        <table id="example" class="example">
+                          <thead>
                             <tr>
                                 <th>Nom</th>
                                 <th>Prénom</th>
@@ -30,6 +35,8 @@
                                 <th>Commissions</th>
                                 <th>rôle</th>
                             </tr>
+                          </thead>
+                          <tbody>
                             <?php
                                 $volunteers = $db->query('SELECT
                                   hex(v.id_volunteer) AS id_volunteer,
@@ -80,6 +87,7 @@
                                 }
                                 $volunteers->closeCursor();
                             ?>
+                          </tbody>
                         </table>
                     </div>
                     <footer id="pied_de_page"></footer>

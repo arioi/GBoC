@@ -30,7 +30,8 @@
             e.begin_datetime_event,
             e.end_datetime_event,
             e.places_event ,
-            e.expected_people');
+            e.expected_people
+            ORDER BY e.begin_datetime_event');
         $event = $event->fetch();
 ?>
         <!DOCTYPE html>
@@ -81,10 +82,12 @@
                             <th>Lieux</th>
                             <th>Nombre de bénévoles max</th>
                             <th>Nombre de bénévole inscrits</th>
+                            <th>&nbsp;&nbsp;</th>
+                            <th>&nbsp;&nbsp;</th>
                         </tr>
                         <?php
                         $tasks = $db->query('SELECT
-                          t.id_task,
+                          hex(t.id_task) as id_task,
                           t.name_task,
                           t.info_task,
                           t.begin_datetime_task,
@@ -101,7 +104,8 @@
                         begin_datetime_task,
                         end_datetime_task,
                         places_task,
-                        max_volunteers ');
+                        max_volunteers
+                        ORDER BY t.begin_datetime_task ');
                         while($data_task=$tasks->fetch()){
                             if($data_task['nb_volunteer'] == NULL) $data_task['nb_volunteer'] = 0?>
                             <tr>
@@ -113,9 +117,15 @@
                                 <td><?php echo $data_task['places_task']?></td>
                                 <td><?php echo $data_task['max_volunteers']?></td>
                                 <td><?php echo $data_task['nb_volunteer']?></td>
-                                <td><form method="post" action=<?php echo '"task.php?id_task='.bin2hex($data_task['id_task']).'"'?>>
-                                    <input class = "table" type="submit" value="Voir la tâche">
-                                </form></td>
+                                <td><a id="zoomIcon" href=<?php echo '"task.php?id_task='.bin2hex($data_task['id_task']).'"'?> name="task" title="Voir la tâche"><i class="material-icons">zoom_in</i></a></td>
+                                <td>
+                                    <form id="userWishlistComForm" class="myform" method="post" action="post_crud_task.php">
+                                        <input type="hidden" name="id_task" value=<?php echo'"'.$data_task['id_task'].'"'?>>
+                                        <input type="hidden" name="id_event" value=<?php echo'"'.$_GET['id_event'].'"'?>>
+                                        <input type="hidden" name="id_commission" value=<?php echo'"'.$_GET['id_commission'].'"'?>>
+                                        <button type="submit" name="RemoveTask" title = "Supprimer la tâche" value=" "><img src="img/delete.png" width="23" height="23" alt="submit" border="0" /></button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php } ?>
                     </table>
@@ -123,39 +133,40 @@
                     <?php if($event['end_datetime_event'] >= date("Y-m-d H:i")){ ?>
                         <h3>Créer une nouvelle tâche <?php echo strtolower($commission['name_commission']) ?> pour l'événement <?php echo strtolower($event['name_event']) ?></h3>
                         <form method="post" action="post_crud_task.php" id="create_task">
-                            Nom de la tâche:<br>
-                            <input type="text" name="name" required=""<?php if(isset($_GET['name'])) echo 'value="'.str_replace('+',' ',$_GET['name']).'"' ?> ><br>
-                            Description de la tâche:<br>
-                            <textarea rows="4" cols="50" name="info" form="create_task"><?php if(isset($_GET['info'])) echo str_replace('+',' ',$_GET['info'])?></textarea><br>
-                            Date et heure de début:<br>
-                            <input type="date" name="begin_date" required=""<?php if(isset($_GET['begin_date'])){
-                              echo 'value="'.$_GET['begin_date'].'"';
+                            Nom de la tâche:<br><br>
+                            <input type="text" class="browser-default" name="name" required=""<?php if(isset($_GET['name'])) echo 'value="'.str_replace('+',' ',$_GET['name']).'"' ?> ><br>
+                            Description de la tâche:<br><br>
+                            <textarea rows="4" class="browser-default" cols="50" name="info" form="create_task"><?php if(isset($_GET['info'])) echo str_replace('+',' ',$_GET['info'])?></textarea><br>
+                            Date et heure de début:<br><br>
+                            <input type="date" id="comTaskBegDateInput" class="browser-default dateTimeInput" name="begin_date" required="" <?php if(isset($_GET['begin_date'])) {
+                                echo 'value="'.$_GET['begin_date'].'"';
                             }  else {
                               echo 'value="'.date('Y-m-d', strtotime($event['begin_datetime_event'])).'"';
                             } ?>>
-                            <input type="time" name="begin_time" required=""<?php if(isset($_GET['begin_time'])){
-                              echo 'value="'.$_GET['begin_time'].'"';
+                            <input type="time" id="comTaskBegTimeInput" class="browser-default dateTimeInput" name="begin_time" required="" <?php if(isset($_GET['begin_time'])) {
+                                echo 'value="'.$_GET['begin_time'].'"';
                             }  else {
                               echo 'value="'.date('H:i', strtotime($event['begin_datetime_event'])).'"';
                             }  ?>><br>
-                            Date et heure de fin:<br>
-                            <input type="date" name="end_date" required=""<?php if(isset($_GET['end_date'])) {
-                              echo 'value="'.$_GET['end_date'].'"';
+                            Date et heure de fin:<br><br>
+                            <input type="date" id="comTaskFinDateInput" class="browser-default dateTimeInput" name="end_date" required=""<?php if(isset($_GET['end_date'])) {
+                                echo 'value="'.$_GET['end_date'].'"';
                             }  else {
                               echo 'value="'.date('Y-m-d', strtotime($event['end_datetime_event'])).'"';
                             }  ?>>
-                            <input type="time" name="end_time" required=""<?php if(isset($_GET['end_time'])) {
-                              echo 'value="'.$_GET['end_time'].'"';
+                            <input type="time" id="comTaskFinTimeInput" class="browser-default dateTimeInput" name="end_time" required=""<?php if(isset($_GET['end_time'])) {
+                                echo 'value="'.$_GET['end_time'].'"';
                             }  else {
                               echo 'value="'.date('H:i', strtotime($event['end_datetime_event'])).'"';
                             }  ?>><br>
-                            Lieux de la tache (à la mission bretonne par défaut):<br>
-                            <input type="text" name="places"<?php if(isset($_GET['places'])) echo 'value="'.str_replace('+',' ',$_GET['places']).'"' ?> ><br>
-                            Nombre de bénévole:<br>
-                            <input type="number" name="max_volunteers" required=""<?php if(isset($_GET['max_volunteers'])) echo 'value="'.$_GET['max_volunteers'].'"' ?>><br>
+                            Lieux de la tache (à la mission bretonne par défaut):<br><br>
+                            <input type="text" class="browser-default" name="places"<?php if(isset($_GET['places'])) echo 'value="'.str_replace('+',' ',$_GET['places']).'"' ?> ><br>
+                            Nombre de bénévole:
+                            <input type="number" id="max_volunteersComTask" class="browser-default max_volunteers" name="max_volunteers" required="" <?php if(isset($_GET['max_volunteers'])) echo 'value="'.$_GET['max_volunteers'].'"' ?>><br>
+
                             <input type="hidden" name="id_commission" value=<?php echo '"'.$_GET['id_commission'].'"'?>>
                             <input type="hidden" name="id_event" value=<?php echo '"'.$_GET['id_event'].'"'?>>
-                            <input class="form" type="submit" name="create" value="Créer la tache">
+                            <input type="submit" name="create" value="Créer la tache">
                         </form>
                         <?php if(isset($_GET['error']) && $_GET['error'] == 'date'){
                             echo "Attention, la tâche se termine avant qu'elle ne commence";

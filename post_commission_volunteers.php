@@ -15,11 +15,12 @@
           WHERE volunteer_activ = 0
           AND id_commission=\''.$id_commission.'\'');
         $waiting = $waiting->fetch();
-        if(isset($_POST['waiting'])){
-            if(!in_array($_POST['id_volunteer'], explode(",",$waiting['volunteers']))){
+
+        if (isset($_POST['waitingAdd']) || isset($_POST['waitingRemove'])) {
+            if (!in_array($_POST['id_volunteer'], explode(",",$waiting['volunteers']))) {
                 header('location: commission_volunteers.php?id='.$_POST['id_commission'].'&error=nowait');
-            }else{
-                if($_POST['waiting'] == "Accepter"){
+            } else {
+                if ($_POST['waitingAdd']) {
                     $add_volunteer = $db->query('UPDATE commissions_volunteers
                       SET volunteer_activ = 1
                       WHERE hex(id_volunteer) = \''.$_POST['id_volunteer'].'\'
